@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content_slide {
+    width: 100vw;
+    height: 100vh;
+    background-color: antiquewhite;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.slide-box {
+    position: relative;
+    /* width: 400px;
+    height: 400px; */
+    width: 100%;
+    height: 100%;
+    background-color: darkblue;
+    overflow: hidden;
+}
+
+.slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 60px;
+    opacity: 0.8;
+}
+
+.slide-btn:hover {
+    opacity: 1;
+}
+
+.slide-btn-left {
+    left: 20px;
+}
+
+.slide-btn-left::after {
+    content: "\276E";
+}
+
+.slide-btn-right {
+    right: 20px;
+}
+
+.slide-btn-right::after {
+    content: "\276F";
+}
+
+.pagination-box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-box>span {
+    margin: 0 10%;
+    flex: none;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    opacity: 0.8;
+    border-radius: 50%;
+}
+
+.pagination-box>span.chose {
+    width: 15px;
+    height: 15px;
+    opacity: 1;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.banner-item {
+    flex: none;
+    width: 100%;
+    height: 100%;
+    background: center center no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+}
+
+.bi-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 10px;
+}
+
+.bi-content>h1 {
+    font-size: inherit;
+    margin-bottom: 5em;
+    text-align: center;
+}
+
+.bi-content>h1>span {
+    font-size: 8em;
+    text-shadow: 0px 0px 5px #000;
+}
+
+.bi-content>button {
+    font-size: inherit;
+    width: 16em;
+    height: 5em;
+    color: #fff;
+    background: none;
+    border: 0.2em solid #fff;
+    border-radius: 1em;
+    box-shadow: 0px 0px 5px #000;
+}
+.bi-content>button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.bi-content>button>span {
+    font-size: 2.4em;
+}
+
+@media screen and (max-width: 900px) {
+    .slide-box {
+        width: 100%;
+        height: 400px;
+    }
+
+    .bi-content {
+        font-size: 6px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .slide-box {
+        width: 100%;
+        height: 300px;
+    }
+    
+}

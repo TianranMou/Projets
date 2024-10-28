@@ -1,0 +1,66 @@
+﻿alim_grp_code,alim_ssgrp_code,alim_ssgrp_nom_fr
+0,0,dessert
+1,101,salades composées et crudités
+1,102,soupes
+1,103,plats composés
+1,104,"pizzas, tartes et crêpes salées"
+1,105,sandwichs
+1,106,feuilletées et autres entrées
+2,201,légumes
+2,202,pommes de terre et autres tubercules
+2,203,légumineuses
+2,204,fruits
+2,205,fruits à coque et graines oléagineuses
+3,301,"pâtes, riz et céréales"
+3,302,pains et assimilés
+3,303,biscuits apéritifs
+3,305,Farine de blé
+4,401,viandes cuites
+4,402,viandes crues
+4,403,charcuteries et assimilés
+4,404,autres produits à base de viande
+4,405,poissons cuits
+4,406,poissons crus
+4,407,mollusques et crustacés cuits
+4,408,mollusques et crustacés crus
+4,409,produits à base de poissons et produits de la mer
+4,410,œufs
+4,411,substitus de produits carnés
+5,501,laits
+5,502,produits laitiers frais et assimilés
+5,503,fromages et assimilés
+5,504,crèmes et spécialités à base de crème
+6,601,eaux
+6,602,boissons sans alcool
+6,603,boisson alcoolisées
+7,701,"sucres, miels et assimilés"
+7,702,chocolats et produits à base de chocolat
+7,703,confiseries non chocolatées
+7,704,confitures et assimilés
+7,705,viennoiseries
+7,706,biscuits sucrés
+7,707,céréales de petit0déjeuner
+7,708,barres céréalières
+7,709,gâteaux et pâtisseries
+8,801,glaces
+8,802,sorbets
+8,803,desserts glacés
+9,901,beurres
+9,902,huiles et graisses végétales
+9,903,margarines
+9,904,huiles de poissons
+9,905,autres matières grasses
+10,1001,sauces
+10,1002,condiments
+10,1003,aides culinaires
+10,1004,sels
+10,1005,épices
+10,1006,herbes
+10,1007,algues
+10,1008,denrées destinées à une alimentation particulière
+10,1009,aides culinaires et ingrédients pour végétariens
+10,1010,ingrédients divers
+11,1101,laits et boissons infantiles
+11,1102,petits pots salés et plats infantiles
+11,1103,desserts infantiles
+11,1104,céréales et biscuits infantiles

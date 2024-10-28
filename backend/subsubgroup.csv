@@ -1,0 +1,139 @@
+﻿alim_ssgrp_code,"alim_ssssgrp_code=A2&B2&""01""",alim_ssssgrp_nom_fr
+0,1,dessert
+101,10101,salades composées et crudités
+102,10201,soupes
+103,10301,plats de viande sans garniture
+103,10302,plats de viande et féculents
+103,10303,plats de viande et légumes/légumineuses
+103,10304,plats de poisson sans garniture
+103,10305,plats de poisson et féculents
+103,10306,plats de légumes/légumineuses
+103,10307,plats de céréales/pâtes
+103,10308,plats de fromage
+103,10309,plats végétariens
+104,10401,"pizzas, tartes et crêpes salées"
+105,10501,sandwichs
+106,10601,feuilletées et autres entrées
+201,20101,légumes crus
+201,20102,légumes cuits
+201,20103,légumes séchés ou déshydratés
+201,20104,légumes et leurs produits de la Martinique
+201,20105,légumes et leurs produits de la Réunion
+202,20201,pommes de terre et autres tubercules
+203,20301,légumineuses cuites
+203,20302,légumineuses fraîches
+203,20303,légumineuses sèches
+204,20401,fruits crus
+204,20402,compotes et assimilés
+204,20403,fruits appertisés
+204,20404,fruits séchés
+204,20405,fruits et leurs produits de la Martinique
+204,20406,fruits et leurs produits de la Réunion
+205,20501,fruits à coque et graines oléagineuses
+301,30101,"pâtes, riz et céréales cuits"
+301,30102,"pâtes, riz et céréales crus"
+302,30201,pains
+302,30202,biscottes et pains grillés
+303,30301,biscuits apéritifs
+305,30501,Farine de blé
+305,30502,Pâte
+401,40100,viandes cuites
+401,40101,bœuf et veau
+401,40102,porc
+401,40103,poulet
+401,40104,dinde
+401,40105,agneau et mouton
+401,40106,gibier
+401,40107,autres viandes
+401,40108,abats
+402,40201,bœuf et veau
+402,40202,porc
+402,40203,poulet
+402,40204,dinde
+402,40205,agneau et mouton
+402,40206,gibier
+402,40207,autres viandes
+402,40208,abats
+403,40300,charcuteries et assimilés
+403,40301,jambons cuits
+403,40302,jambons secs et crus
+403,40303,saucisson secs
+403,40304,saucisses et assimilés
+403,40305,pâtés et terrines
+403,40306,rillettes
+403,40307,quenelles
+403,40308,autres spécialités charcutières
+403,40309,substituts de charcuteries pour végétariens
+404,40401,autres produits à base de viande
+405,40501,poissons cuits
+406,40601,poissons crus
+407,40701,mollusques et crustacés cuits
+408,40801,mollusques et crustacés crus
+409,40901,produits à base de poissons et produits de la mer
+410,41001,œufs cuits
+410,41002,œufs crus
+410,41003,omelettes et autres ovoproduits
+411,41101,substitus de produits carnés
+501,50101,laits de vaches liquides (non concentrés)
+501,50102,laits autres que de vache
+501,50103,laits de vache concentrés ou en poudre
+502,50201,yaourts et spécialités laitières type yaourt
+502,50202,fromages blancs
+502,50203,desserts lactés
+502,50204,autres desserts
+502,50205,desserts végétaux
+503,50300,fromages et assimilés
+503,50301,fromages à pâte molle
+503,50302,fromages à pâte persillée
+503,50303,fromages à pâte pressée
+503,50304,fromage fondus
+503,50305,autres fromages et spécialités
+503,50306,substituts de fromages pour végétariens
+504,50401,crèmes et spécialités à base de crème
+601,60101,eaux
+602,60201,jus
+602,60202,nectars
+602,60203,boissons rafraîchissantes sans alcool
+602,60204,boissons rafraîchissantes lactées
+602,60205,boissons végétales
+602,60206,"café, thé, cacao etc. prêts à consommer"
+602,60207,boissons à reconstituer
+603,60301,vins
+603,60302,bières et cidres
+603,60303,liqueurs et alcools
+603,60304,cocktails
+701,70101,"sucres, miels et assimilés"
+702,70201,chocolats et produits à base de chocolat
+703,70301,confiseries non chocolatées
+704,70401,confitures et assimilés
+705,70501,viennoiseries
+706,70601,biscuits sucrés
+707,70701,céréales de petit0déjeuner
+708,70801,barres céréalières
+709,70901,gâteaux et pâtisseries
+801,80101,glaces
+802,80201,sorbets
+803,80301,desserts glacés
+901,90101,beurres
+902,90201,huiles et graisses végétales
+903,90301,margarines
+904,90401,huiles de poissons
+905,90501,autres matières grasses
+1001,100100,sauces
+1001,100101,sauces condimentaires
+1001,100102,sauces chaudes
+1001,100103,sauces sucrées
+1002,100201,condiments
+1003,100301,aides culinaires
+1004,100401,sels
+1005,100501,épices
+1006,100601,herbes fraîches
+1006,100602,herbes séchées
+1007,100701,algues
+1008,100801,denrées destinées à une alimentation particulière
+1009,100900,aides culinaires et ingrédients pour végétariens
+1009,100901,ingrédients divers
+1101,110101,laits et boissons infantiles
+1102,110201,petits pots salés et plats infantiles
+1103,110301,desserts infantiles
+1104,110401,céréales et biscuits infantiles
