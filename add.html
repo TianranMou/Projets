@@ -9,6 +9,19 @@
     <script tyle="text/javascript" src="./js/select.js"></script>
 </head>
 <body>
+    <h2> already select</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody id="addedItemsTableBody"></tbody>
+    </table>
+
+
+
+
     <h2>choose the food</h2>
     
     <!--  -->
@@ -33,16 +46,17 @@
     <table>
         <thead>
             <tr>
-                <th>name</th>
+                <th>Name</th>
+                <th>Add<th>
             </tr>
         </thead>
         <tbody id="foodItemsTableBody"></tbody>
     </table>
 
     <div class="pagination">
-        <button id="prevPageBtn" onclick="changePage(-1)" disabled>上一页</button>
+        <button id="prevPageBtn" onclick="changePage(-1)" disabled>previous</button>
         <span id="currentPageLabel"> 1 </span>
-        <button id="nextPageBtn" onclick="changePage(1)" disabled>下一页</button>
+        <button id="nextPageBtn" onclick="changePage(1)" disabled>next</button>
     </div>
 
 </body>

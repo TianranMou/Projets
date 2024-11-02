@@ -2,8 +2,10 @@ window.onload = function() {
     loadGroups();
 };
 
+let addedItems = [];
 let currentPage = 1;
-let totalPages = 0;
+let foodItems = [];
+let pageSize = 10;
 
 // 
 function loadGroups() {
@@ -70,19 +72,66 @@ function loadFoodItems() {
     fetch(`./backend/group.php?subSubGroupId=${subSubGroupId}`)
     .then(response => response.json())
     .then(data => {
-        loadTable(data);
+        foodItems = data;
+        currentPage = 1;
+        loadTable();
+        updatePaginationButtons();
     })
     .catch(error => console.error('Error fetching food items:', error));
 }
 
-function loadTable(items) {
+function loadTable() {
     const tableBody = document.getElementById('foodItemsTableBody');
     tableBody.innerHTML = ''; 
 
-    items.forEach(item => {
+    const start = (currentPage - 1) * pageSize;
+    const end = start + pageSize;
+    const paginatedItems = foodItems.slice(start, end);
+
+    paginatedItems.forEach(item => {
         let newRow = `<tr>
             <td>${item.FOOD_NAME}</td>
+            <td><button onclick="addItem(${item.ID_FOOD}, '${item.FOOD_NAME}')">+</button></td>
         </tr>`;
         tableBody.insertAdjacentHTML('beforeend', newRow);
     });
 }
+
+function changePage(direction) {
+    currentPage += direction;
+    loadTable();
+    updatePaginationButtons();
+}
+
+
+function updatePaginationButtons() {
+    const totalPages = Math.ceil(foodItems.length / pageSize);
+    document.getElementById('prevPageBtn').disabled = (currentPage === 1);
+    document.getElementById('nextPageBtn').disabled = (currentPage === totalPages);
+    document.getElementById('currentPageLabel').innerText = ` ${currentPage} `;
+}
+
+// 
+function addItem(id, name) {
+        addedItems.push({ id, name }); 
+        renderAddedItems(); 
+        alert("add successfully");
+}
+
+//
+function renderAddedItems() {
+    const addedTableBody = document.getElementById('addedItemsTableBody');
+    addedTableBody.innerHTML = ''; 
+
+    addedItems.forEach(item => {
+        let newRow = `<tr>
+            <td>${item.name}</td>
+        </tr>`;
+        addedTableBody.insertAdjacentHTML('beforeend', newRow);
+    });
+}
+
+
+
+
+
