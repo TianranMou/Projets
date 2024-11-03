@@ -50,9 +50,10 @@
             </script>
         </div>
         <!-- nav module end -->
-    <label for="mealTime"> when u eat ?</label>
-    <input type="datetime-local" id="mealTime">
-    <h2> Food already select</h2>
+    <div class="search-part">
+        <label for="mealTime"> when u eat ?</label>
+        <input type="datetime-local" id="mealTime">
+        <h2> Food already select</h2>
     <table>
         <thead>
             <tr>
@@ -105,6 +106,11 @@
         <button id="prevPageBtn" onclick="changePage(-1)" disabled>previous</button>
         <span id="currentPageLabel"> 1 </span>
         <button id="nextPageBtn" onclick="changePage(1)" disabled>next</button>
+    </div>
+
+
+
+
     </div>
 
 </body>
