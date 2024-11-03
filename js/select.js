@@ -91,7 +91,7 @@ function loadTable() {
     paginatedItems.forEach(item => {
         let newRow = `<tr>
             <td>${item.FOOD_NAME}</td>
-            <td><button onclick="addItem(${item.ID_FOOD}, '${item.FOOD_NAME}')">+</button></td>
+            <td><button onclick="promptQuantity(${item.ID_FOOD}, '${item.FOOD_NAME}')">+</button></td>
         </tr>`;
         tableBody.insertAdjacentHTML('beforeend', newRow);
     });
@@ -111,9 +111,18 @@ function updatePaginationButtons() {
     document.getElementById('currentPageLabel').innerText = ` ${currentPage} `;
 }
 
+
+function promptQuantity(id, name) {
+    const quantity = prompt("Quantity?:", "1");
+    if (quantity && !isNaN(quantity) && parseInt(quantity) > 0) {
+        addItem(id, name, parseInt(quantity)); 
+    } else {
+        alert("please input quantity");
+    }
+}
 // 
-function addItem(id, name) {
-        addedItems.push({ id, name }); 
+function addItem(id, name,quantity) {
+        addedItems.push({ id, name, quantity}); 
         renderAddedItems(); 
         alert("add successfully");
 }
@@ -123,15 +132,112 @@ function renderAddedItems() {
     const addedTableBody = document.getElementById('addedItemsTableBody');
     addedTableBody.innerHTML = ''; 
 
-    addedItems.forEach(item => {
-        let newRow = `<tr>
+    addedItems.forEach((item,index) => {
+        let newRow = `<tr id="item-row-${index}">
             <td>${item.name}</td>
+            <td class="quantity-cell">${item.quantity}</td>
+             <td>
+                <button onclick="deleteItem(${index})">Delete</button>
+                <button class="edit-button" onclick="editItem(${index})">Modify</button>
+            </td>
         </tr>`;
         addedTableBody.insertAdjacentHTML('beforeend', newRow);
     });
 }
 
+function deleteItem(index) {
+    addedItems.splice(index, 1); 
+    renderAddedItems(); 
+}
 
+function editItem(index) {
+    const itemRow = document.getElementById(`item-row-${index}`);
+    const quantityCell = itemRow.querySelector('.quantity-cell');
+    const editButton = itemRow.querySelector('.edit-button');
 
+    quantityCell.innerHTML = `<input type="number" value="${addedItems[index].quantity}" min="1" id="edit-quantity-${index}">`;
+    editButton.textContent = 'Save';
+    editButton.onclick = function() {
+        saveItem(index); 
+    };
+}
 
+function saveItem(index) {
+    const newQuantity = document.getElementById(`edit-quantity-${index}`).value;
 
+    if (newQuantity && !isNaN(newQuantity) && parseInt(newQuantity) > 0) {
+        addedItems[index].quantity = parseInt(newQuantity); 
+        renderAddedItems(); 
+    } else {
+        alert("enter quantity");
+    }
+}
+
+function searchFood() {
+    const foodName = document.getElementById("foodSearchInput").value.trim();
+    if (!foodName) {
+        alert("Enter the name");
+        return;
+    }
+
+    fetch(`./backend/group.php?search=${encodeURIComponent(foodName)}`)
+        .then(response => response.json())
+        .then(data => {
+            foodItems = data;
+            currentPage = 1;
+            loadTable();
+            updatePaginationButtons();
+            }
+        )
+        .catch(error => console.error('Error fetching search results:', error));
+}
+
+function submitSelectedItems() {
+
+    const mealTimeInput = document.getElementById("mealTime").value;
+    const formattedMealTime = formatMealTime(mealTimeInput);
+    if (!mealTimeInput) {
+        alert("When u eat?");
+        return;
+    }
+    const payload = {
+        user_id: 2,
+        meal_time: formattedMealTime,
+        items: addedItems.map(item => ({
+            food_id: item.id,
+            quantity_eat: item.quantity
+        }))
+    };
+
+    fetch('./backend/meal.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert("sucessful");
+            addedItems = []; 
+            renderAddedItems(); 
+            document.getElementById("mealTime").value = ''; 
+        } else {
+            alert("failed, retry");
+        }
+    })
+    .catch(error => console.error("Error submitting selected items:", error));
+}
+
+function formatMealTime(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = '00'; 
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}

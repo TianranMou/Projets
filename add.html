@@ -9,15 +9,21 @@
     <script tyle="text/javascript" src="./js/select.js"></script>
 </head>
 <body>
-    <h2> already select</h2>
+    <label for="mealTime"> when u eat ?</label>
+    <input type="datetime-local" id="mealTime">
+    <h2> Food already select</h2>
     <table>
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Quantity</th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="addedItemsTableBody"></tbody>
     </table>
+
+    <button onclick="submitSelectedItems()">Submit</button>
 
 
 
@@ -40,6 +46,10 @@
     <select id="foodSubSubGroup" onchange="loadFoodItems()">
         <option value="">choose</option>
     </select>
+
+    <h2>Not find? try search</h2>
+    <input type="text" id="foodSearchInput" placeholder="Enter the name">
+    <button onclick="searchFood()">Search</button>
 
     <!--  -->
     <h3>list</h3>

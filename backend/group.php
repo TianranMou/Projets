@@ -38,6 +38,16 @@ function getfood($pdo, $subSubGroupId) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
+
+
+function searchFoodByName($pdo, $name) {
+    $sql = "SELECT ID_FOOD, FOOD_NAME FROM food WHERE FOOD_NAME LIKE :food_name";
+    $stmt = $pdo->prepare($sql);
+    $likeName = "%" . $name . "%";
+    $stmt->bindParam(':food_name', $likeName, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
 // 
 setHeaders();
 
@@ -59,6 +69,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             $subSubGroupId = $_GET['subSubGroupId'];
             $items = getfood($pdo, $subSubGroupId);
             echo json_encode($items);
+        } elseif (isset($_GET['search'])) {
+            $searchTerm = $_GET['search'];
+            $searchResults = searchFoodByName($pdo, $searchTerm);
+            echo json_encode($searchResults);
         } else {
             $group = getGroup($pdo);
             echo json_encode($group);
