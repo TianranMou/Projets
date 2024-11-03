@@ -95,3 +95,40 @@ function toggleActionRow(index) {
 function goToAddPage() {
     window.location.href = 'add.html';
 }
+
+
+function goToEditPage() {
+
+}
+
+function deleteMeal(index) {
+
+    const meal = all_meals[index]; 
+    const mealId = meal.ID_MEAL; 
+    const foodId = meal.ID_FOOD; 
+
+    fetch('./backend/meal.php', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            meal_id: mealId,
+            food_id: foodId
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Delete successful:', data);
+        all_meals.splice(index, 1);
+        loadTable(all_meals); 
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}

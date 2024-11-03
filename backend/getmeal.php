@@ -5,7 +5,7 @@ require_once("pdo.php");
 function get_meals($pdo, $userid) {
     if (isset($userid)) {
 
-        $sql = "SELECT m.DATE_MEAL, c.QUANTITY_EAT, f.ID_FOOD,f.FOOD_NAME
+        $sql = "SELECT m.DATE_MEAL, c.QUANTITY_EAT, f.ID_FOOD,f.FOOD_NAME, m.ID_MEAL
                 FROM meal m 
                 JOIN composition c ON c.ID_MEAL = m.ID_MEAL 
                 JOIN food f ON f.ID_FOOD = c.ID_FOOD

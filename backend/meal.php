@@ -80,20 +80,15 @@ function update_meal($pdo, $meal_id, $meal_time, $food_id, $quantity_eat) {
 }
 
 // 
-function delete_meal($pdo, $meal_id) {
+function delete_meal($pdo, $meal_id, $food_id) {
     try {
         $pdo->beginTransaction();
         
         // 
-        $sql = "DELETE FROM composition WHERE ID_MEAL = :meal_id";
+        $sql = "DELETE FROM composition WHERE ID_MEAL = :meal_id AND ID_FOOD = :food_id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':meal_id', $meal_id);
-        $stmt->execute();
-        
-        // 
-        $sql = "DELETE FROM meal WHERE ID_MEAL = :meal_id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':meal_id', $meal_id);
+        $stmt->bindParam(':food_id', $food_id);
         $stmt->execute();
         
         $pdo->commit();
@@ -164,7 +159,7 @@ try {
         case 'DELETE':
             $data = json_decode(file_get_contents("php://input"), true);
             if (isset($data['meal_id'])) {
-                $success = delete_meal($pdo, $data['meal_id']);
+                $success = delete_meal($pdo, $data['meal_id'],$data['food_id']);
                 
                 if ($success) {
                     http_response_code(200);
