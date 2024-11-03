@@ -170,7 +170,7 @@ class SlideBox {
     getBannerItemHTML(bannerImg) {
         return `
             <div class="banner-item" 
-                style="background-image: url(../control/domo2/images/${bannerImg.img});">
+                style="background-image: url(./images/${bannerImg.img});">
             </div>
         `
     }
@@ -178,6 +178,6 @@ class SlideBox {
 //     <h1>
 //         <span>${bannerImg.title}</span>
 //     </h1>
-//     <button><span>了解详情</span></button>
+//     <button><span>for details</span></button>
 // </div>
 }
