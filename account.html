@@ -94,8 +94,15 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="sport_value">Sport Value</label>
-                        <input type="number" id="sport_value" name="sport_value" required>
+                        <label for="sport_value">Sport Level</label>
+                        <select id="sport_value" name="sport_value" required>
+                            <option value="" disabled selected>Select your sport level</option>
+                            <option value="0">Level 0 - Not sport at all</option>
+                            <option value="1">Level 1 - 90mins mid or 45mins high</option>
+                            <option value="2">Level 2 - 150mins mid or 90mins high</option>
+                            <option value="3">Level 3 - 240mins mid or 144mins high</option>
+                            <option value="4">Level 4 - 300mins mid or 180mins high</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="date_of_birth">Date of Birth</label>
