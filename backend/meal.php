@@ -45,7 +45,7 @@ function create_meal($pdo, $user_id, $meal_time, $items) {
 }
 
 // 
-function update_meal($pdo, $meal_id, $meal_time, $food_id, $quantity_eat) {
+function update_meal($pdo, $meal_id, $meal_time, $food_id, $food_id_old, $quantity_eat) {
     try {
         $pdo->beginTransaction();
         
@@ -60,12 +60,13 @@ function update_meal($pdo, $meal_id, $meal_time, $food_id, $quantity_eat) {
         
         // 
         $sql = "UPDATE composition 
-                SET ID_FOOD = :food_id, 
+                SET ID_FOOD = :food_id_new, 
                     QUANTITY_EAT = :quantity_eat 
-                WHERE ID_MEAL = :meal_id";
+                WHERE ID_MEAL = :meal_id AND ID_FOOD = :food_id_old";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':meal_id', $meal_id);
-        $stmt->bindParam(':food_id', $food_id);
+        $stmt->bindParam(':food_id_new', $food_id);
+        $stmt->bindParam(':food_id_old', $food_id_old);
         $stmt->bindParam(':quantity_eat', $quantity_eat);
         $stmt->execute();
         
@@ -131,13 +132,14 @@ try {
             $data = json_decode(file_get_contents("php://input"), true);
             if (isset($data['meal_id']) && 
                 isset($data['meal_time']) && isset($data['food_id']) && 
-                isset($data['quantity_eat'])) {
-                    
+                isset($data['quantity_eat'])&&isset($data['food_id_old'])) 
+                {
                 $success = update_meal($pdo,
                     $data['meal_id'],
                     $data['meal_time'],
                     $data['food_id'],
-                    $data['quantity_eat']
+                    $data['quantity_eat'],
+                    $data['food_id_old']
                 );
                 
                 if ($success) {

@@ -1,5 +1,8 @@
 //initial all users data
-let all_meals = [];   
+let all_meals = [];  
+
+
+let selectedFoodId= null;
 
 //send get request to db and return all users data
 function getData() {
@@ -97,9 +100,127 @@ function goToAddPage() {
 }
 
 
-function goToEditPage() {
+function editMeal(index, event) {
+    event.stopPropagation();
 
+    const meal = all_meals[index];
+    const row = document.querySelector(`#action-row-${index}`).previousElementSibling; 
+    const dateCell = row.querySelector('td:nth-child(1)'); 
+    const foodCell = row.querySelector('td:nth-child(2)'); 
+    const quantityCell = row.querySelector('td:nth-child(3)'); 
+
+    
+    dateCell.innerHTML = `<input type="text" id="edit-date-${index}" value="${meal.DATE_MEAL}">`;
+    foodCell.innerHTML = `<input type="text" id="edit-input-${index}" value="${meal.FOOD_NAME}" placeholder="enter...">`;
+    quantityCell.innerHTML = `<input type="number" id="edit-quantity-${index}" value="${meal.QUANTITY_EAT}" min="1">`;
+
+    const input = document.getElementById(`edit-input-${index}`);
+    const quantityInput = document.getElementById(`edit-quantity-${index}`);
+    const dateInput = document.getElementById(`edit-date-${index}`);
+    
+    selectedFoodId = meal.ID_FOOD;
+
+
+    const dropdown = document.createElement('ul');
+    dropdown.id = `dropdown-${index}`;
+    dropdown.style.position = 'absolute';
+    dropdown.style.border = '1px solid #ccc';
+    dropdown.style.backgroundColor = 'white';
+    dropdown.style.listStyleType = 'none';
+    dropdown.style.padding = '5px';
+    dropdown.style.margin = '0';
+    dropdown.style.width = `${input.offsetWidth}px`;
+    dropdown.style.maxHeight = '150px';
+    dropdown.style.overflowY = 'auto';
+
+    foodCell.style.position = 'relative';
+    dropdown.style.top = `${input.offsetHeight}px`;
+    foodCell.appendChild(dropdown);
+
+    input.addEventListener('input', function () {
+        const query = input.value.trim();
+        if (query.length > 0) {
+            fetch(`./backend/group.php?search=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    dropdown.innerHTML = '';
+                    data.forEach(food => {
+                        const item = document.createElement('li');
+                        item.textContent = food.FOOD_NAME;
+                        item.style.cursor = 'pointer';
+                        item.style.padding = '5px';
+                        item.style.borderBottom = '1px solid #ddd';
+                        item.addEventListener('click', () => {
+                            input.value = food.FOOD_NAME;
+                            selectedFoodId = food.ID_FOOD;
+                            dropdown.innerHTML = '';
+                        });
+                        dropdown.appendChild(item);
+                    });
+                })
+                .catch(error => console.error('Error fetching food data:', error));
+        } else {
+            dropdown.innerHTML = '';
+        }
+    });
+
+    const actionCell = document.querySelector(`#action-row-${index} td`);
+    actionCell.innerHTML = `<button onclick="saveMeal(${index}, event)">Save</button>
+                           <button onclick="deleteMeal(${index}, event)">Delete</button>`;
 }
+
+
+function saveMeal(index) {
+
+    const meal = all_meals[index];
+    const foodName = document.getElementById(`edit-input-${index}`).value;
+    const quantityEat = document.getElementById(`edit-quantity-${index}`).value;
+    const mealTime = document.getElementById(`edit-date-${index}`).value;
+
+    
+    meal.FOOD_NAME = foodName;
+    meal.QUANTITY_EAT = quantityEat;
+    meal.DATE_MEAL = mealTime;
+
+    
+    const row = document.querySelector(`#action-row-${index}`).previousElementSibling;
+    row.querySelector('td:nth-child(1)').textContent = mealTime;
+    row.querySelector('td:nth-child(2)').textContent = foodName;
+    row.querySelector('td:nth-child(3)').textContent = quantityEat;
+
+    fetch('./backend/meal.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            meal_id: meal.ID_MEAL,
+            meal_time: mealTime, 
+            food_id: selectedFoodId,
+            quantity_eat: quantityEat,
+            food_id_old : meal.ID_FOOD
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Update successful:', data);
+        meal.ID_FOOD = selectedFoodId;
+        const actionCell = document.querySelector(`#action-row-${index} td`);
+        actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modify</button>
+                               <button onclick="deleteMeal(${index}, event)">Delete</button>`;
+        loadTable(all_meals); 
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+
 
 function deleteMeal(index) {
 
