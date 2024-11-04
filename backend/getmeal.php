@@ -9,7 +9,8 @@ function get_meals($pdo, $userid) {
                 FROM meal m 
                 JOIN composition c ON c.ID_MEAL = m.ID_MEAL 
                 JOIN food f ON f.ID_FOOD = c.ID_FOOD
-                WHERE m.ID_USER = :id_user";
+                WHERE m.ID_USER = :id_user
+                ORDER BY m.DATE_MEAL DESC";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id_user', $userid, PDO::PARAM_INT);
         $stmt->execute();
