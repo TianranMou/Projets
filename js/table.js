@@ -189,7 +189,7 @@ function editMeal(index, event) {
         quantityCell.textContent = row.dataset.originalQuantity;
                                 
 
-        actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Edit</button>
+        actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modify</button>
                                 <button onclick="deleteMeal(${index}, event)">Delete</button>`;
                                 
 
