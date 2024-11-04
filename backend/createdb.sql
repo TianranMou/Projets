@@ -1,0 +1,19 @@
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS tptest;
+USE tptest;
+
+-- 创建用户表
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `ID_USER` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_SEXE` int(11) NOT NULL,
+  `SPORT_VALUE` int(11) NOT NULL,
+  `SURNAME` varchar(255) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `DATE_OF_BRITH` date NOT NULL,
+  `PWD` varchar(255) NOT NULL,
+  `EMAIL` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID_USER`),
+  UNIQUE KEY `idx_email` (`EMAIL`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
