@@ -111,7 +111,7 @@ function get_top5food_of_allusers($pdo, $userid) {
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $res;
     } else {
-        error_log("No user_id in request");
+        error_log("fail");
         return null;
     }
 }
