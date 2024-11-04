@@ -1,8 +1,9 @@
 //initial all users data
 let all_meals = [];  
 
-
 let selectedFoodId= null;
+
+let currentEditingIndex = null;
 
 //send get request to db and return all users data
 function getData() {
@@ -84,7 +85,8 @@ function searchMeals(query) {
 }
 
 function toggleActionRow(index) {
-    // Hide all action rows first
+
+      // Hide all action rows first
     document.querySelectorAll('.action-row').forEach(row => {
         row.style.display = 'none';
     });
@@ -108,6 +110,10 @@ function editMeal(index, event) {
     const dateCell = row.querySelector('td:nth-child(1)'); 
     const foodCell = row.querySelector('td:nth-child(2)'); 
     const quantityCell = row.querySelector('td:nth-child(3)'); 
+
+    row.dataset.originalDate = dateCell.textContent;
+    row.dataset.originalFood = foodCell.textContent;
+    row.dataset.originalQuantity = quantityCell.textContent;
 
     
     dateCell.innerHTML = `<input type="text" id="edit-date-${index}" value="${meal.DATE_MEAL}">`;
@@ -167,6 +173,37 @@ function editMeal(index, event) {
     const actionCell = document.querySelector(`#action-row-${index} td`);
     actionCell.innerHTML = `<button onclick="saveMeal(${index}, event)">Save</button>
                            <button onclick="deleteMeal(${index}, event)">Delete</button>`;
+
+    function handleClickOutside(e) {
+    const editRow = row;
+    const actionRow = document.querySelector(`#action-row-${index}`);
+    const dropdown = document.getElementById(`dropdown-${index}`);
+                            
+                        
+        if (!editRow.contains(e.target) && !actionRow.contains(e.target) && 
+        (!dropdown || !dropdown.contains(e.target))) {
+                                
+    
+        dateCell.textContent = row.dataset.originalDate;
+        foodCell.textContent = row.dataset.originalFood;
+        quantityCell.textContent = row.dataset.originalQuantity;
+                                
+
+        actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Edit</button>
+                                <button onclick="deleteMeal(${index}, event)">Delete</button>`;
+                                
+
+        if (dropdown) {
+            dropdown.remove();}
+                                
+
+        document.removeEventListener('click', handleClickOutside);
+        }
+    }
+                        
+    setTimeout(() => {
+        document.addEventListener('click', handleClickOutside);
+        }, 0);                       
 }
 
 

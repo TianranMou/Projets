@@ -15,7 +15,7 @@ input, textarea, button, select, radio{outline: 0; border: 0;}
 .container{margin: 0 2.9%;}
 ul.style li{float: left;}
 
-.header{position: relative; height: 85px; background: #fff;}
+.header{position: relative; height: 85px; background: #dfdfdf;}
 .header .container{z-index: 1; margin:0 auto; padding:0 14%}
 .header ul li{  width: 11.11%; text-align: center;}
 
