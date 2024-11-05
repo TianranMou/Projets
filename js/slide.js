@@ -2,7 +2,7 @@ window.onload = function () {
 
     const slideBox = new SlideBox([
         {
-            img: "Advertise1.jpg",
+            img: "Advertise1.png",
            
         },
         {
