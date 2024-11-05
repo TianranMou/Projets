@@ -16,10 +16,6 @@ function getData() {
     })
     .then(response => {
         if (!response.ok) {
-            if (response.status === 401) {
-                window.location.href = 'account.html';
-                throw new Error('未登录');
-            }
             throw new Error('请求失败');
         }
         return response.json();
@@ -42,9 +38,6 @@ function getData() {
     })
     .catch(error => {
         console.error('Error:', error);
-        if (error.message !== '未登录') {
-            alert('获取数据失败');
-        }
     });
 }
 
@@ -311,7 +304,7 @@ function deleteMeal(index) {
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
-        alert('删除失败');
+        alert('删除���败');
     });
 }
 
