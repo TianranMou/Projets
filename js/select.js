@@ -91,7 +91,10 @@ function loadTable() {
     paginatedItems.forEach(item => {
         let newRow = `<tr>
             <td>${item.FOOD_NAME}</td>
-            <td><button onclick="promptQuantity(${item.ID_FOOD}, '${item.FOOD_NAME}')">+</button></td>
+            <td>
+                <input type="number" min="1" value="1" style="width: 60px;" id="quantity-${item.ID_FOOD}">
+                <button onclick="addItemDirectly(${item.ID_FOOD}, '${item.FOOD_NAME}')">+</button>
+            </td>
         </tr>`;
         tableBody.insertAdjacentHTML('beforeend', newRow);
     });
@@ -111,15 +114,18 @@ function updatePaginationButtons() {
     document.getElementById('currentPageLabel').innerText = ` ${currentPage} `;
 }
 
-
-function promptQuantity(id, name) {
-    const quantity = prompt("Quantity?:", "1");
-    if (quantity && !isNaN(quantity) && parseInt(quantity) > 0) {
-        addItem(id, name, parseInt(quantity)); 
+function addItemDirectly(id, name) {
+    const quantityInput = document.getElementById(`quantity-${id}`);
+    const quantity = parseInt(quantityInput.value);
+    
+    if (quantity && !isNaN(quantity) && quantity > 0) {
+        addItem(id, name, quantity);
+        quantityInput.value = 1; // 重置输入框为默认值
     } else {
-        alert("please input quantity");
+        alert("请输入有效的数量");
     }
 }
+
 // 
 function addItem(id, name,quantity) {
         addedItems.push({ id, name, quantity}); 
