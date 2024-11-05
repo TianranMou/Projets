@@ -1,1 +1,173 @@
- 
+/* 主容器样式 */
+.search-part {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 标题样式 */
+h2 {
+    color: #000;
+    margin: 30px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000;
+}
+
+h3 {
+    color: #333;
+    margin: 25px 0 15px;
+}
+
+/* 表单元素通用样式 */
+label {
+    display: block;
+    margin: 15px 0 5px;
+    color: #333;
+    font-weight: 500;
+}
+
+input[type="datetime-local"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="datetime-local"]:focus,
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #000;
+}
+
+/* 按钮样式 */
+button {
+    padding: 10px 20px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 表格样式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #000;
+    color: white;
+    font-weight: 500;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 15px;
+}
+
+#currentPageLabel {
+    font-size: 14px;
+    color: #333;
+}
+
+
+#foodSearchInput {
+    width: calc(100% - 110px);
+    margin-right: 10px;
+    display: inline-block;
+}
+
+/* 下拉选择框组样式 */
+.select-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .search-part {
+        width: 95%;
+        padding: 15px;
+    }
+
+    input[type="datetime-local"],
+    input[type="text"],
+    select {
+        width: 100%;
+    }
+
+    .select-group {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+
+/* 添加项目的表格样式 */
+#addedItemsTableBody td {
+    vertical-align: middle;
+}
+
+#addedItemsTableBody input[type="number"] {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 操作按钮样式 */
+.action-button {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* 搜索结果表格样式 */
+#foodItemsTableBody button {
+    padding: 6px 12px;
+    font-size: 12px;
+} 
