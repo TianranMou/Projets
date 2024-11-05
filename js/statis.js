@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-const getDataBtn = document.getElementById('getdata');
+const getDataBtn = document.getElementById('getNutData');
 
 getDataBtn.addEventListener('click', () => {
-  fetch('./backend/statis.php?action=daily-nutrition&user_id=2')
+  fetch('./backend/statis.php?action=nutrition&user_id=2')
     .then(response => response.json())
     .then(data => {
 
@@ -15,7 +15,95 @@ getDataBtn.addEventListener('click', () => {
     });
 });
 
+const getUserBtn = document.getElementById('getUserData');
+
+getUserBtn.addEventListener("click", () => {
+  const weight = parseFloat(document.getElementById("weightInput").value);
+  
+  if (isNaN(weight) || weight <= 0) {
+      document.getElementById("result").innerText = "enter weight";
+      return;
+  }
+
+  fetch('./backend/statis.php?action=user&user_id=2')
+  .then(response => response.json())
+  .then(data => {
+    const age = calculateAge(data.DATE_OF_BIRTH);
+    const height = data.HEIGHT;
+    const sportlevel = data.SPORT_VALUE;
+
+    const{tdee,protein,carbs,fat}=calculateEnergy(age,height,weight,sportlevel)
+    console.log('TDEE:', tdee);
+    console.log('Protein:', protein);
+    console.log('Carbs:', carbs);
+    console.log('Fat:', fat);
+
+    document.getElementById("result").innerText =`
+    Daily Energy: ${tdee}kcal
+    Protein: ${protein}
+    Carbs: ${carbs}
+    Fat:${fat}g`;
+  })
+  .catch(error => {
+    console.error('Error fetching user data:', error);
+  });
+
 });
+
+});
+
+
+
+function calculateAge(birthDate) {
+  const birth = new Date(birthDate);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+  }
+  return age;
+}
+
+function calculateEnergy(age,height,weight,sportlevel){
+
+
+  let coef;
+  const bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+  switch (sportlevel) {
+    case '0' :
+      coef = 1.2;
+      break;
+    
+    case '1':
+      coef = 1.375;
+      break;
+    
+    case '2':
+      coef = 1.55;
+      break;
+
+    case '3':
+      coef = 1.725;
+      break;
+
+    case '4':
+      coef = 1.9;
+      break;
+  }
+
+  const tdee = bmr*coef;
+  const protein = (tdee * 0.20) / 4; 
+  const carbs = (tdee * 0.55) / 4; 
+  const fat = (tdee * 0.25) / 9; 
+  return {
+      tdee: Math.round(tdee),
+      protein: Math.round(protein),
+      carbs: Math.round(carbs),
+      fat: Math.round(fat)
+  };
+}
+
 
 
 function formatNutritionData(data) {

@@ -22,7 +22,7 @@ function get_daily_nutrition($pdo, $userid) {
                         JOIN 
                             nutrition_per_100g n ON f.ID_FOOD = n.ID_FOOD
                         WHERE 
-                            m.ID_USER = 1
+                            m.ID_USER = :id_user
                         GROUP BY 
                             m.DATE_MEAL, m.ID_USER, n.ID_NUTRITION
                     ) AS daily_nutrient_totals 
@@ -41,6 +41,21 @@ function get_daily_nutrition($pdo, $userid) {
     }
 }
 
+
+function get_userdata($pdo,$userid){
+    if (isset($userid)){
+        $sql="SELECT DATE_OF_BRITH, SPORT_VALUE, HEIGHT
+        FROM user
+        WHERE ID_USER = :id_user
+        ";
+        $stmt = $pdo ->prepare($sql);
+        $stmt->bindParam(':id_user', $userid, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    } 
+}
+
 function get_top5food($pdo, $userid) {
     if (isset($userid)) {
         $sql = "SELECT f.FOOD_NAME, 
@@ -52,7 +67,7 @@ function get_top5food($pdo, $userid) {
                 LEFT JOIN 
                     meal m ON c.ID_MEAL = m.ID_MEAL 
                 WHERE 
-                    m.ID_USER = 1  
+                    m.ID_USER = :id_user 
                 GROUP BY 
                     f.FOOD_NAME  
                 ORDER BY 
@@ -83,52 +98,48 @@ setHeaders();
 switch ($_SERVER["REQUEST_METHOD"]) {
 
     case 'GET':
-        if (isset($_GET['user_id'])) {
-            $userid = $_GET['user_id'];
-            error_log("Received user_id: " . $userid);
+        $action = isset($_GET['action']) ? $_GET['action'] : null;
+        $userid = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 
-            $daily_nutrition = get_daily_nutrition($pdo, $userid);
-            if ($daily_nutrition !== null) {
+    switch ($action) {
+        case 'nutrition':
+            $nutrition_data = get_daily_nutrition($pdo, $userid);
+            if ($nutrition_data !== null) {
                 http_response_code(200);
-                echo json_encode($daily_nutrition);
+                echo json_encode($nutrition_data);
             } else {
                 http_response_code(404);
-                echo json_encode(['error' => 'can not find your data']);
+                echo json_encode(['error' => 'No nutrition data found']);
             }
-        } else {
-            http_response_code(400);
-            echo json_encode(['error' => 'unvalid input: user_id is nessecary']);
-        }
-        exit();
-        break;
-    
-  
-    case 'GET':
-        if (isset($_GET['user_id'])) {
-            $userid = $_GET['user_id'];
-            error_log("Received user_id: " . $userid);
+            break;
 
-            $top_foods = get_top_foods($pdo, $userid);
+        case 'user':
+            $user_data = get_userdata($pdo, $userid);
+            if ($user_data !== null) {
+                http_response_code(200);
+                echo json_encode($user_data);
+            } else {
+                http_response_code(404);
+                echo json_encode(['error' => 'User not found']);
+            }
+            break;
+
+        case 'top5food':
+            $top_foods = get_top5food($pdo, $userid);
             if ($top_foods !== null) {
                 http_response_code(200);
                 echo json_encode($top_foods);
             } else {
                 http_response_code(404);
-                echo json_encode(['error' => 'can not find your top 5 consomated food']);
+                echo json_encode(['error' => 'No food data found']);
             }
-        } else {
+            break;
+
+        default:
             http_response_code(400);
-            echo json_encode(['error' => 'invalid input: user_id is necessary']);
-        }
-        exit();
-        break;
-
-    // 
-    default:
-        http_response_code(405);
-        echo json_encode(['error' => 'unallowed method']);
-        exit();
+            echo json_encode(['error' => 'Invalid action']);
+            break;
+    }
 }
-
 
 ?>
