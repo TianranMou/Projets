@@ -60,6 +60,7 @@ function formatNutritionData(data) {
 
   for (const [key, value] of Object.entries(groupedData)) {
     if (value.length > 0) {
+
       rootNode.children.push({
         name: key,
         children: value
@@ -97,6 +98,18 @@ function renderSunburstChart(data){
     // };
 
     // 
+
+    data.children.forEach(category => {
+      category.children.forEach(item => {
+          if (item.name.includes("mg")) {
+              item.value = item.value / 1000; 
+
+          } else if (item.name.includes("µg")) {
+              item.value = item.value / 1000000; // 
+          } 
+      });
+    });
+  
     const svg = d3.select("#chart")
         .append("svg")
         .attr("viewBox", [-width / 2, -height / 2, width, width])
@@ -157,7 +170,21 @@ function renderSunburstChart(data){
         .attr("dy", "0.35em")
         .attr("fill-opacity", d => +labelVisible(d.current))
         .attr("transform", d => labelTransform(d.current))
-        .text(d => d.data.name);
+        .style("font-size","14px")
+    label
+        .append("tspan")
+        .attr("x", 0)
+        .attr("dy", "0.35em")
+        .text((d) => d.data.name);
+          
+    label
+        .append("tspan")
+        .attr("x", 0)
+        .attr("dy", "1.1em")
+        .text((d) => {
+              const originalValue = d.data.value * (d.data.name.includes('mg') ? 1000 : (d.data.name.includes('µg') ? 1000000 : 1));
+              return d.data.value > 0 ? `${originalValue}` : '';
+        }); 
 
     // 
     const parent = svg.append("circle")
