@@ -25,26 +25,36 @@ function formatNutritionData(data) {
   };
 
   const groupedData = {
-    sucre: [],
-    vitamin: [],
-    mineral: [],
-    fatty_acid: [],
-    other: []
+    Water: [],
+    Protein: [],
+    Carbohydrates:[],
+    Fiber:[],
+    Alcohol:[],
+    Fats:[],
+    Mineral:[],
+    Vitamin:[]
   };
 
-  data.forEach(item => {
+  data.forEach((item, index) => {
     const { DICTIONARYNUTRITION, average_daily_intake } = item;
+    
 
-    if (DICTIONARYNUTRITION.includes('Sucres')) {
-      groupedData.sucre.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
-    } else if (DICTIONARYNUTRITION.includes('Vitamine')) {
-      groupedData.vitamin.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
-    } else if (DICTIONARYNUTRITION.includes('(mg/100 g)') || DICTIONARYNUTRITION.includes('(µg/100 g)')) {
-      groupedData.mineral.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
-    } else if (DICTIONARYNUTRITION.includes('AG')) {
-      groupedData.fatty_acid.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
-    } else {
-      groupedData.other.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+    if (index == 2) { 
+      groupedData.Water.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+    } else if (index ==3) { 
+      groupedData.Protein.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+    } else if (index ==4 ||(index >= 6 && index < 13)) { 
+      groupedData.Carbohydrates.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+    } else if (index == 14) { 
+      groupedData.Fiber.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+    } else if (index ==15) {
+      groupedData.Alcohol.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+    } else if (index == 5 ||(index >= 16 && index < 20)) {
+      groupedData.Fats.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+    } else if (index >= 20 && index < 32) {
+      groupedData.Mineral.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+    } else { 
+      groupedData.Vitamin.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
     }
   });
 

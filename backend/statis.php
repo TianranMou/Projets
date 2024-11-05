@@ -4,31 +4,31 @@ require_once("pdo.php");
 
 function get_daily_nutrition($pdo, $userid) {
     if (isset($userid)) {
-        $sql = "SELECT nutrition.DICTIONARYNUTRITION,
-                AVG(total_nutrient) AS average_daily_intake
-                FROM (
-                    SELECT 
-                        m.ID_USER,
+        $sql = "    SELECT nutrition.DICTIONARYNUTRITION, IFNULL(AVG(total_nutrient), 0) AS average_daily_intake
+                    FROM 
+                        nutrition
+                    LEFT JOIN (
+                        SELECT 
+                            m.ID_USER,
                             m.DATE_MEAL,
                             n.ID_NUTRITION,
-                        SUM(n.QUANTITY_CHARACTERISTIC * c.QUANTITY_EAT/100) AS total_nutrient
-                    FROM 
-                        meal m
-                    JOIN
-                        composition c ON c.ID_MEAL = m.ID_MEAL
-                    JOIN 
-                        food f ON c.ID_FOOD = f.ID_FOOD
-                    JOIN 
-                        nutrition_per_100g n ON f.ID_FOOD = n.ID_FOOD
-                    WHERE 
-                        m.ID_USER = 1
+                            SUM(n.QUANTITY_CHARACTERISTIC * c.QUANTITY_EAT / 100) AS total_nutrient
+                        FROM 
+                            meal m
+                        JOIN 
+                            composition c ON c.ID_MEAL = m.ID_MEAL
+                        JOIN 
+                            food f ON c.ID_FOOD = f.ID_FOOD
+                        JOIN 
+                            nutrition_per_100g n ON f.ID_FOOD = n.ID_FOOD
+                        WHERE 
+                            m.ID_USER = 1
+                        GROUP BY 
+                            m.DATE_MEAL, m.ID_USER, n.ID_NUTRITION
+                    ) AS daily_nutrient_totals 
+                    ON daily_nutrient_totals.ID_NUTRITION = nutrition.ID_NUTRITION
                     GROUP BY 
-                        m.DATE_MEAL, m.ID_USER, n.ID_NUTRITION
-                ) AS daily_nutrient_totals
-
-                JOIN nutrition ON daily_nutrient_totals.ID_NUTRITION = nutrition.ID_NUTRITION
-                GROUP BY 
-                daily_nutrient_totals.ID_NUTRITION
+                        nutrition.ID_NUTRITION
                 ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id_user', $userid, PDO::PARAM_INT);
