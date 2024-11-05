@@ -1,36 +1,51 @@
 //initial all users data
 let all_meals = [];  
-
-let selectedFoodId= null;
-
+let selectedFoodId = null;
 let currentEditingIndex = null;
+let currentUserId = null;
 
 //send get request to db and return all users data
 function getData() {
-
-    const requestBody ={
-        user_id : 2
-    };
     fetch('./backend/getmeal.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(requestBody)
+        credentials: 'include',
+        body: JSON.stringify({})
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data !== "") {
-                all_meals = data;
-                loadTable(all_meals);
-            } else {
-                alert("Error from API " + data.message);
+    .then(response => {
+        if (!response.ok) {
+            if (response.status === 401) {
+                window.location.href = 'account.html';
+                throw new Error('未登录');
             }
-        })
-        .catch(error => {
-            console.error('Error', error)
-            alert('Failed to get data.');
-        });
+            throw new Error('请求失败');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+            all_meals = data;
+            loadTable(all_meals);
+        } else {
+            all_meals = [];
+            const tableBody = document.getElementById('usersTableBody');
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 20px;">
+                        暂无餐食记录，点击 "Add New Meal" 添加新的餐食
+                    </td>
+                </tr>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        if (error.message !== '未登录') {
+            alert('获取数据失败');
+        }
+    });
 }
 
 // print all data in table
@@ -38,7 +53,7 @@ function loadTable(meals) {
     const tableBody = document.getElementById('usersTableBody');
     tableBody.innerHTML = ''; 
 
-    meals.forEach((meal,index) => {
+    meals.forEach((meal, index) => {
         let newRow = `<tr class="data-row" onclick="toggleActionRow(${index})">
             <td>${meal.DATE_MEAL}</td>
             <td>${meal.FOOD_NAME}</td>
@@ -71,22 +86,42 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
-
-
 });
 
-
 function searchMeals(query) {
-    const filteredMeals = all_meals.filter(meal => {
-        return meal.DATE_MEAL.includes(query) || meal.FOOD_NAME.includes(query);
+    fetch('./backend/getmeal.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            search: query
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+            all_meals = data;
+            loadTable(all_meals);
+        } else {
+            const tableBody = document.getElementById('usersTableBody');
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 20px;">
+                        未找到匹配的餐食记录
+                    </td>
+                </tr>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('搜索失败');
     });
-
-    loadTable(filteredMeals); 
 }
 
 function toggleActionRow(index) {
-
-      // Hide all action rows first
+    // Hide all action rows first
     document.querySelectorAll('.action-row').forEach(row => {
         row.style.display = 'none';
     });
@@ -101,7 +136,6 @@ function goToAddPage() {
     window.location.href = 'add.html';
 }
 
-
 function editMeal(index, event) {
     event.stopPropagation();
 
@@ -114,7 +148,6 @@ function editMeal(index, event) {
     row.dataset.originalDate = dateCell.textContent;
     row.dataset.originalFood = foodCell.textContent;
     row.dataset.originalQuantity = quantityCell.textContent;
-
     
     dateCell.innerHTML = `<input type="text" id="edit-date-${index}" value="${meal.DATE_MEAL}">`;
     foodCell.innerHTML = `<input type="text" id="edit-input-${index}" value="${meal.FOOD_NAME}" placeholder="enter...">`;
@@ -125,7 +158,6 @@ function editMeal(index, event) {
     const dateInput = document.getElementById(`edit-date-${index}`);
     
     selectedFoodId = meal.ID_FOOD;
-
 
     const dropdown = document.createElement('ul');
     dropdown.id = `dropdown-${index}`;
@@ -172,58 +204,41 @@ function editMeal(index, event) {
 
     const actionCell = document.querySelector(`#action-row-${index} td`);
     actionCell.innerHTML = `<button onclick="saveMeal(${index}, event)">Save</button>
-                           <button onclick="deleteMeal(${index}, event)">Delete</button>`;
+                           <button onclick="cancelEdit(${index}, event)">Cancel</button>`;
 
     function handleClickOutside(e) {
-    const editRow = row;
-    const actionRow = document.querySelector(`#action-row-${index}`);
-    const dropdown = document.getElementById(`dropdown-${index}`);
-                            
-                        
+        const editRow = row;
+        const actionRow = document.querySelector(`#action-row-${index}`);
+        const dropdown = document.getElementById(`dropdown-${index}`);
+        
         if (!editRow.contains(e.target) && !actionRow.contains(e.target) && 
-        (!dropdown || !dropdown.contains(e.target))) {
-                                
-    
-        dateCell.textContent = row.dataset.originalDate;
-        foodCell.textContent = row.dataset.originalFood;
-        quantityCell.textContent = row.dataset.originalQuantity;
-                                
+            (!dropdown || !dropdown.contains(e.target))) {
+            
+            dateCell.textContent = row.dataset.originalDate;
+            foodCell.textContent = row.dataset.originalFood;
+            quantityCell.textContent = row.dataset.originalQuantity;
 
-        actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modify</button>
-                                <button onclick="deleteMeal(${index}, event)">Delete</button>`;
-                                
+            actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modify</button>
+                                  <button onclick="deleteMeal(${index}, event)">Delete</button>`;
 
-        if (dropdown) {
-            dropdown.remove();}
-                                
+            if (dropdown) {
+                dropdown.remove();
+            }
 
-        document.removeEventListener('click', handleClickOutside);
+            document.removeEventListener('click', handleClickOutside);
         }
     }
                         
     setTimeout(() => {
         document.addEventListener('click', handleClickOutside);
-        }, 0);                       
+    }, 0);                       
 }
 
-
 function saveMeal(index) {
-
     const meal = all_meals[index];
     const foodName = document.getElementById(`edit-input-${index}`).value;
     const quantityEat = document.getElementById(`edit-quantity-${index}`).value;
     const mealTime = document.getElementById(`edit-date-${index}`).value;
-
-    
-    meal.FOOD_NAME = foodName;
-    meal.QUANTITY_EAT = quantityEat;
-    meal.DATE_MEAL = mealTime;
-
-    
-    const row = document.querySelector(`#action-row-${index}`).previousElementSibling;
-    row.querySelector('td:nth-child(1)').textContent = mealTime;
-    row.querySelector('td:nth-child(2)').textContent = foodName;
-    row.querySelector('td:nth-child(3)').textContent = quantityEat;
 
     fetch('./backend/meal.php', {
         method: 'PUT',
@@ -235,7 +250,7 @@ function saveMeal(index) {
             meal_time: mealTime, 
             food_id: selectedFoodId,
             quantity_eat: quantityEat,
-            food_id_old : meal.ID_FOOD
+            food_id_old: meal.ID_FOOD
         })
     })
     .then(response => {
@@ -247,20 +262,18 @@ function saveMeal(index) {
     .then(data => {
         console.log('Update successful:', data);
         meal.ID_FOOD = selectedFoodId;
-        const actionCell = document.querySelector(`#action-row-${index} td`);
-        actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modify</button>
-                               <button onclick="deleteMeal(${index}, event)">Delete</button>`;
-        loadTable(all_meals); 
+        meal.FOOD_NAME = foodName;
+        meal.QUANTITY_EAT = quantityEat;
+        meal.DATE_MEAL = mealTime;
+        loadTable(all_meals);
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
+        alert('更新失败');
     });
 }
 
-
-
 function deleteMeal(index) {
-
     const meal = all_meals[index]; 
     const mealId = meal.ID_MEAL; 
     const foodId = meal.ID_FOOD; 
@@ -284,9 +297,41 @@ function deleteMeal(index) {
     .then(data => {
         console.log('Delete successful:', data);
         all_meals.splice(index, 1);
-        loadTable(all_meals); 
+        loadTable(all_meals);
+        if (all_meals.length === 0) {
+            const tableBody = document.getElementById('usersTableBody');
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 20px;">
+                        暂无餐食记录，点击 "Add New Meal" 添加新的餐食
+                    </td>
+                </tr>
+            `;
+        }
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
+        alert('删除失败');
     });
+}
+
+function cancelEdit(index, event) {
+    event.stopPropagation();
+    const row = document.querySelector(`#action-row-${index}`).previousElementSibling;
+    const dateCell = row.querySelector('td:nth-child(1)');
+    const foodCell = row.querySelector('td:nth-child(2)');
+    const quantityCell = row.querySelector('td:nth-child(3)');
+    
+    dateCell.textContent = row.dataset.originalDate;
+    foodCell.textContent = row.dataset.originalFood;
+    quantityCell.textContent = row.dataset.originalQuantity;
+
+    const actionCell = document.querySelector(`#action-row-${index} td`);
+    actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modify</button>
+                           <button onclick="deleteMeal(${index}, event)">Delete</button>`;
+
+    const dropdown = document.getElementById(`dropdown-${index}`);
+    if (dropdown) {
+        dropdown.remove();
+    }
 }
