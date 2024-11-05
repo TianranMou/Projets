@@ -1,55 +1,54 @@
 <!doctype html>
 <html lang="fr">
 <head>
+    <script src="js/checkLogin.js"></script>
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> -->
     <title>tabletest</title>
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/tpcommon.css">
-    <script tyle="text/javascript" src="./js/table.js"></script>
 </head>
 <body>
-        <!-- Nav module start -->
-        <div class="hidden header">
-            <div class="pr container tc">
-                <ul class="hidden style nav">
-                    <li><a href='tpindex.html'>Home</a></li>
-                    <li class="active"><a href="consomationdetail.html" mark="product">Consomation</a></li>
-                    <li><a href="nutritionstatistic.html" mark="product">Statistic</a></li>
-                    <li><a href="contact.html" mark="product">Contact</a></li>
-                    <li><a href="account.html" mark="product">Account</a></li>
-                </ul>
-                <div class="clear"></div> 
-                <div class="floatr"></div>
-                <a class="logo" href="index.html"><img src="logo.png" alt="Application"></a>
-      
-            </div>
-    
-        <!--when the screen is small, use a different nav, for mobile phones-->
-            <div class="menu clearfix" id="menu_toggle1">
-                <span onclick="showmenu()">≡≡</span>
-            </div>
-            <div class="menubox" id="menubox">
-                <span id="index_close" onclick="hidemenu()">x</span>
-                <ul class="menus-list">
-                    <li class=""><a href='tpindex.html'>Home</a></li>
-                    <li><a href="consomationdetail.html" mark="product">My consomation</a></li>
-                    <li><a href="nutritionstatistic.html" mark="product">Statistic</a></li>
-                    <li><a href="contact.html" mark="product">Contact</a></li>
-                    <li><a href="account.html" mark="product">My account</a></li>
-                </ul>
-            </div>
-            <script language="javascript">
-                function showmenu(){
-                document.getElementById("menubox").style.display="block"
-                }
-                function hidemenu(){
-                document.getElementById("menubox").style.display="none"
-                }
-            </script>
+    <!-- Nav module start -->
+    <div class="hidden header">
+        <div class="pr container tc">
+            <ul class="hidden style nav">
+                <li><a href='tpindex.html'>Home</a></li>
+                <li class="active"><a href="consomationdetail.html" mark="product">Consomation</a></li>
+                <li><a href="nutritionstatistic.html" mark="product">Statistic</a></li>
+                <li><a href="contact.html" mark="product">Contact</a></li>
+                <li><a href="account.html" mark="product">Account</a></li>
+            </ul>
+            <div class="clear"></div> 
+            <div class="floatr"></div>
+            <a class="logo" href="index.html"><img src="logo.png" alt="Application"></a>
         </div>
-        <!-- nav module end -->
+
+        <!--when the screen is small, use a different nav, for mobile phones-->
+        <div class="menu clearfix" id="menu_toggle1">
+            <span onclick="showmenu()">≡≡</span>
+        </div>
+        <div class="menubox" id="menubox">
+            <span id="index_close" onclick="hidemenu()">x</span>
+            <ul class="menus-list">
+                <li class=""><a href='tpindex.html'>Home</a></li>
+                <li><a href="consomationdetail.html" mark="product">My consomation</a></li>
+                <li><a href="nutritionstatistic.html" mark="product">Statistic</a></li>
+                <li><a href="contact.html" mark="product">Contact</a></li>
+                <li><a href="account.html" mark="product">My account</a></li>
+            </ul>
+        </div>
+        <script language="javascript">
+            function showmenu(){
+                document.getElementById("menubox").style.display="block"
+            }
+            function hidemenu(){
+                document.getElementById("menubox").style.display="none"
+            }
+        </script>
+    </div>
+    <!-- nav module end -->
+
     <div class="search-part">
         <input type="text" id="searchField" placeholder="Search by Food name, Date">
         <button id="searchButton">Search</button>

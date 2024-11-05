@@ -58,6 +58,12 @@
                 <button type="button" class="submit-btn" onclick="showLoginForm()">Go to Login</button>
             </div>
 
+            <!-- 登录提示框 -->
+            <div id="loginPrompt" class="form-container" style="display: none;">
+                <h2>Please login first</h2>
+                <button type="button" class="submit-btn" onclick="hideLoginPrompt()">OK</button>
+            </div>
+
             <!-- 登录注册表单容器 -->
             <div id="loginRegisterForms">
                 <div class="form-tabs">
@@ -165,12 +171,24 @@
                 showForm('login');
             }
 
+            function hideLoginPrompt() {
+                document.getElementById('loginPrompt').style.display = 'none';
+                document.getElementById('loginRegisterForms').style.display = 'block';
+                showForm('login');
+            }
+
             // 页面加载时检查登录状态和错误信息
             window.onload = function() {
                 checkLoginStatus();
                 
                 // 检查URL参数
                 const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('needLogin') === 'true') {
+                    document.getElementById('loginPrompt').style.display = 'block';
+                    document.getElementById('loginRegisterForms').style.display = 'none';
+                    return;
+                }
+                
                 if (urlParams.get('registered') === 'success') {
                     document.getElementById('loginRegisterForms').style.display = 'none';
                     document.getElementById('registerSuccess').style.display = 'block';
