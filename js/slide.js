@@ -15,7 +15,7 @@ window.onload = function () {
         },
 
         {
-            img: "Advertise2.jpg"
+            img: "Advertise1.jpg"
             
         },
         {
