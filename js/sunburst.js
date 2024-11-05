@@ -23,6 +23,16 @@
             ]
         };
 
+        data.children.forEach(category => {
+            category.children.forEach(item => {
+                if (item.name.includes("mg")) {
+                    item.value = item.value / 1000; 
+
+                } else if (item.name.includes("µg")) {
+                    item.value = item.value / 1000000; // 
+                } 
+            });
+        });
         // 
         const svg = d3.select("#chart")
             .append("svg")
@@ -84,7 +94,10 @@
             .attr("dy", "0.35em")
             .attr("fill-opacity", d => +labelVisible(d.current))
             .attr("transform", d => labelTransform(d.current))
-            .text(d => d.data.name);
+            .text(d => {
+                const originalValue = d.data.value * (d.data.name.includes('mg') ? 1000 : (d.data.name.includes('µg') ? 1000000 : 1));
+                return `${d.data.name}: ${originalValue}`;
+            });        
 
         // 
         const parent = svg.append("circle")

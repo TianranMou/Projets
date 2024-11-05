@@ -53,7 +53,7 @@ function formatNutritionData(data) {
       groupedData.Fats.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
     } else if (index >= 20 && index < 32) {
       groupedData.Mineral.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
-    } else { 
+    } else if (index >= 32 && index <38){
       groupedData.Vitamin.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
     }
   });
