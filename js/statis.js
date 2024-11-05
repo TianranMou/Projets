@@ -1,4 +1,4 @@
-const getDataBtn = document.getElementById('get-data');
+const getDataBtn = document.getElementById('getdata');
 
 
 getDataBtn.addEventListener('click', () => {
