@@ -1,5 +1,6 @@
-const getDataBtn = document.getElementById('getdata');
+document.addEventListener('DOMContentLoaded', () => {
 
+const getDataBtn = document.getElementById('getdata');
 
 getDataBtn.addEventListener('click', () => {
   fetch('./backend/statis.php?action=daily-nutrition&user_id=2')
@@ -12,6 +13,8 @@ getDataBtn.addEventListener('click', () => {
     .catch(error => {
       console.error('Error fetching nutrition data:', error);
     });
+});
+
 });
 
 
