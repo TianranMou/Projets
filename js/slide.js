@@ -2,24 +2,24 @@ window.onload = function () {
 
     const slideBox = new SlideBox([
         {
-            img: "Advertise1.jpg",
+            img: "Ad1.jpg",
            
         },
         {
-            img: "Advertise2.jpg"
+            img: "Ad2.jpg"
             
         },
         {
-            img: "Advertise1.jpg"
+            img: "Ad1.jpg"
             
         },
 
         {
-            img: "Advertise2.jpg"
+            img: "Ad2.jpg"
             
         },
         {
-            img: "Advertise1.jpg"
+            img: "Ad1.jpg"
             
         }
     ]);
