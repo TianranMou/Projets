@@ -19,7 +19,7 @@ window.onload = function () {
             
         },
         {
-            img: "Advertise3.jpg"
+            img: "Advertise1.png"
             
         }
     ]);
