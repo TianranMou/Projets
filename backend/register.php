@@ -20,8 +20,8 @@ try {
     }
 
     // 邮箱不存在，继续注册流程
-    $stmt = $pdo->prepare("INSERT INTO user (SURNAME, NAME, EMAIL, PWD, ID_SEXE, SPORT_VALUE, DATE_OF_BRITH) 
-                          VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO user (SURNAME, NAME, EMAIL, PWD, ID_SEXE, SPORT_VALUE, DATE_OF_BRITH, HEIGHT) 
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     
     $stmt->execute([
         $_POST['surname'],
@@ -30,7 +30,8 @@ try {
         $_POST['password'],
         $_POST['id_sexe'],
         $sport_value,
-        $_POST['date_of_birth']
+        $_POST['date_of_birth'],
+        $_POST['height']
     ]);
 
     // 注册成功，直接重定向
