@@ -108,7 +108,7 @@ function searchMeals(query) {
             tableBody.innerHTML = `
                 <tr>
                     <td colspan="3" style="text-align: center; padding: 20px;">
-                        未找到匹配的餐食记录
+                        can not find
                     </td>
                 </tr>
             `;
@@ -116,7 +116,7 @@ function searchMeals(query) {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('搜索失败');
+        alert('fail');
     });
 }
 

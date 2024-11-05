@@ -4,31 +4,31 @@ require_once("pdo.php");
 
 function get_daily_nutrition($pdo, $userid) {
     if (isset($userid)) {
-        $sql = "SELECT nutrition.DICTIONARYNUTRITION,
-                AVG(total_nutrient) AS average_daily_intake
-                FROM (
-                    SELECT 
-                        m.ID_USER,
-                            m.DATE,
-                            n.ID_NUTRITION,
-                        SUM(n.QUANTITY_CHARACTERISTIC * c.QUATITY_EAT/100) AS total_nutrient
+        $sql = "    SELECT nutrition.DICTIONARYNUTRITION, IFNULL(AVG(total_nutrient), 0) AS average_daily_intake
                     FROM 
-                        meal m
-                    JOIN
-                        composition c ON c.ID_MEAL = m.ID_MEAL
-                    JOIN 
-                        food f ON c.ID_FOOD = f.ID_FOOD
-                    JOIN 
-                        nutrition_per_100g n ON f.ID_FOOD = n.ID_FOOD
-                    WHERE 
-                        m.ID_USER = 1
+                        nutrition
+                    LEFT JOIN (
+                        SELECT 
+                            m.ID_USER,
+                            m.DATE_MEAL,
+                            n.ID_NUTRITION,
+                            SUM(n.QUANTITY_CHARACTERISTIC * c.QUANTITY_EAT / 100) AS total_nutrient
+                        FROM 
+                            meal m
+                        JOIN 
+                            composition c ON c.ID_MEAL = m.ID_MEAL
+                        JOIN 
+                            food f ON c.ID_FOOD = f.ID_FOOD
+                        JOIN 
+                            nutrition_per_100g n ON f.ID_FOOD = n.ID_FOOD
+                        WHERE 
+                            m.ID_USER = :id_user
+                        GROUP BY 
+                            m.DATE_MEAL, m.ID_USER, n.ID_NUTRITION
+                    ) AS daily_nutrient_totals 
+                    ON daily_nutrient_totals.ID_NUTRITION = nutrition.ID_NUTRITION
                     GROUP BY 
-                        m.DATE, m.ID_USER, n.ID_NUTRITION
-                ) AS daily_nutrient_totals
-
-                JOIN nutrition ON daily_nutrient_totals.ID_NUTRITION = nutrition.ID_NUTRITION
-                GROUP BY 
-                daily_nutrient_totals.ID_NUTRITION
+                        nutrition.ID_NUTRITION
                 ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id_user', $userid, PDO::PARAM_INT);
@@ -39,6 +39,20 @@ function get_daily_nutrition($pdo, $userid) {
         error_log("No user_id in request");
         return null;
     }
+}
+
+
+function get_userdata($pdo,$userid){
+    if (isset($userid)){
+        $sql="SELECT DATE_OF_BIRTH, SPORT_VALUE, HEIGHT
+        FROM user
+        WHERE ID_USER = :id_user";
+        $stmt = $pdo ->prepare($sql);
+        $stmt->bindParam(':id_user', $userid, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    } 
 }
 
 function get_top5food($pdo, $userid) {
@@ -52,7 +66,7 @@ function get_top5food($pdo, $userid) {
                 LEFT JOIN 
                     meal m ON c.ID_MEAL = m.ID_MEAL 
                 WHERE 
-                    m.ID_USER = 1  
+                    m.ID_USER = :id_user 
                 GROUP BY 
                     f.FOOD_NAME  
                 ORDER BY 
@@ -70,52 +84,6 @@ function get_top5food($pdo, $userid) {
 }
 
 
-function get_top5food_of_allusers($pdo, $userid) {
-    if (isset($userid)) {
-        $sql = "SELECT 
-                    FOOD_NAME,
-                    total_consumed,
-                    ID_USER
-                FROM (
-                    SELECT 
-                        f.FOOD_NAME,
-                        COALESCE(SUM(c.QUANTITY_EAT), 0) AS total_consumed,
-                        m.ID_USER,
-                        IF(
-                            @prev_user = m.ID_USER,
-                            @row_num := @row_num + 1,
-                            @row_num := IF(@prev_user := m.ID_USER, 1, 1)
-                        ) AS row_num
-                    FROM 
-                        food f
-                    LEFT JOIN 
-                        composition c ON f.ID_FOOD = c.ID_FOOD
-                    LEFT JOIN 
-                        meal m ON c.ID_MEAL = m.ID_MEAL,
-                        (SELECT @row_num := 0, @prev_user := 0) AS vars
-                    WHERE 
-                        m.ID_USER IS NOT NULL
-                    GROUP BY 
-                        f.FOOD_NAME, m.ID_USER
-                    ORDER BY 
-                        m.ID_USER, total_consumed DESC
-                ) all_foods
-                WHERE 
-                    row_num <= 5
-                ORDER BY 
-                    ID_USER, 
-                    total_consumed DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id_user', $userid, PDO::PARAM_INT);
-        $stmt->execute();
-        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $res;
-    } else {
-        error_log("fail");
-        return null;
-    }
-}
-
 
 
 function setHeaders() {
@@ -125,46 +93,57 @@ function setHeaders() {
 
 setHeaders();
 
+
 switch ($_SERVER["REQUEST_METHOD"]) {
-    case 'POST':
-        $input = file_get_contents("php://input");
-        $data = json_decode($input, true);
-        
-        if (isset($data['user_id'])) {
-            
-            error_log("Received user_id: " . $data['user_id']);
-            
-            $check_user_sql = "SELECT COUNT(*) FROM meal WHERE ID_USER = :id";
-            $stmt = $pdo->prepare($check_user_sql);
-            $stmt->bindParam(':id', $data['user_id'], PDO::PARAM_INT);
-            $stmt->execute();
-            $user_exists = $stmt->fetchColumn() > 0;
-            
-            if (!$user_exists) {
-                http_response_code(404);
-                echo json_encode(['error' => 'User not found']);
-                exit();
-            }
-            
-            $meals = get_meals($pdo, $data['user_id']);
-            
-            if ($meals !== null) {
+
+    case 'GET':
+        $action = isset($_GET['action']) ? $_GET['action'] : null;
+        $userid = isset($_GET['user_id']) ? $_GET['user_id'] : null;
+
+    switch ($action) {
+        case 'nutrition':
+            $nutrition_data = get_daily_nutrition($pdo, $userid);
+            if ($nutrition_data !== null) {
                 http_response_code(200);
-                echo json_encode($meals);
+                echo json_encode($nutrition_data);
             } else {
                 http_response_code(404);
-                echo json_encode(['error' => 'No meals found for this user']);
+                echo json_encode(['error' => 'No nutrition data found']);
             }
-        } else {
+            break;
+
+        case 'user':
+            $user_data = get_userdata($pdo, $userid);
+            $nutrition_data = get_daily_nutrition($pdo,$userid);
+            if ($user_data !== null && $nutrition_data !== null) {
+                http_response_code(200);
+                $response = [
+                    'user_data' => $user_data,
+                    'nutrition_data' => $nutrition_data
+                ];
+                echo json_encode($response);
+            } else {
+                http_response_code(404);
+                echo json_encode(['error' => 'User not found']);
+            }
+            break;
+
+        case 'top5food':
+            $top_foods = get_top5food($pdo, $userid);
+            if ($top_foods !== null) {
+                http_response_code(200);
+                echo json_encode($top_foods);
+            } else {
+                http_response_code(404);
+                echo json_encode(['error' => 'No food data found']);
+            }
+            break;
+
+        default:
             http_response_code(400);
-            echo json_encode(['error' => 'Invalid input: user_id is required']);
-        }
-        exit();
-        break;
-        
-    default:
-        http_response_code(405);
-        echo json_encode(['error' => 'Method Not Allowed']);
-        exit();
+            echo json_encode(['error' => 'Invalid action']);
+            break;
+    }
 }
+
 ?>

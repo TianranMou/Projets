@@ -164,7 +164,7 @@ try {
                 isset($data['food_id']) && isset($data['quantity_eat']) && 
                 isset($data['food_id_old'])) {
                 
-                // 验证meal是否属于当前用户
+                // 
                 if (!verifyMealOwnership($pdo, $data['meal_id'], $current_user_id)) {
                     http_response_code(403);
                     exit(json_encode(['error' => '无权操作此记录']));
