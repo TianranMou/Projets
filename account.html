@@ -43,74 +43,90 @@
 
         <!-- Account Forms Container -->
         <div class="account-container">
-            <div class="form-tabs">
-                <button class="tab-button active" onclick="showForm('login')">Login</button>
-                <button class="tab-button" onclick="showForm('register')">Register</button>
-            </div>
-
-            <!-- Login Form -->
-            <div id="loginForm" class="form-container active">
-                <form action="backend/login.php" method="POST">
-                    <!-- 错误信息显示区域 -->
-                    <div id="loginError" class="error-message"></div>
-                    
-                    <div class="form-group">
-                        <label for="login-email">Email</label>
-                        <input type="email" id="login-email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">Password</label>
-                        <input type="password" id="login-password" name="password" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Login</button>
+            <!-- 欢迎信息容器 -->
+            <div id="welcomeMessage" class="form-container" style="display: none;">
+                <h2>Hello, <span id="userNameSpan"></span></h2>
+                <form action="backend/logout.php" method="POST">
+                    <button type="submit" class="submit-btn">Logout</button>
                 </form>
             </div>
 
-            <!-- Register Form -->
-            <div id="registerForm" class="form-container">
-                <form action="backend/register.php" method="POST">
-                    <div class="form-group">
-                        <label for="surname">Surname</label>
-                        <input type="text" id="surname" name="surname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="register-email">Email</label>
-                        <input type="email" id="register-email" name="email" required>
-                        <div class="error-message" id="emailError"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="register-password">Password</label>
-                        <input type="password" id="register-password" name="password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_sexe">Gender</label>
-                        <select id="id_sexe" name="id_sexe" required>
-                            <option value="0">Neutre</option>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sport_value">Sport Level</label>
-                        <select id="sport_value" name="sport_value" required>
-                            <option value="" disabled selected>Select your sport level</option>
-                            <option value="0">Level 0 - Not sport at all</option>
-                            <option value="1">Level 1 - 90mins mid or 45mins high</option>
-                            <option value="2">Level 2 - 150mins mid or 90mins high</option>
-                            <option value="3">Level 3 - 240mins mid or 144mins high</option>
-                            <option value="4">Level 4 - 300mins mid or 180mins high</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="date_of_birth">Date of Birth</label>
-                        <input type="date" id="date_of_birth" name="date_of_birth" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Register</button>
-                </form>
+            <!-- 注册成功消息 -->
+            <div id="registerSuccess" class="form-container" style="display: none;">
+                <h2>Registration Successful!</h2>
+                <p>You can now login with your credentials.</p>
+                <button type="button" class="submit-btn" onclick="showLoginForm()">Go to Login</button>
+            </div>
+
+            <!-- 登录注册表单容器 -->
+            <div id="loginRegisterForms">
+                <div class="form-tabs">
+                    <button class="tab-button active" onclick="showForm('login')">Login</button>
+                    <button class="tab-button" onclick="showForm('register')">Register</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="form-container active">
+                    <form action="backend/login.php" method="POST">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" name="password" required>
+                            <div id="loginError" class="error-message"></div>
+                        </div>
+                        <button type="submit" class="submit-btn">Login</button>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="registerForm" class="form-container">
+                    <form action="backend/register.php" method="POST">
+                        <div class="form-group">
+                            <label for="surname">Surname</label>
+                            <input type="text" id="surname" name="surname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" name="email" required>
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_sexe">Gender</label>
+                            <select id="id_sexe" name="id_sexe" required>
+                                <option value="0">Neutre</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sport_value">Sport Level</label>
+                            <select id="sport_value" name="sport_value" required>
+                                <option value="" disabled selected>Select your sport level</option>
+                                <option value="0">Level 0 - Not sport at all</option>
+                                <option value="1">Level 1 - 90mins mid or 45mins high</option>
+                                <option value="2">Level 2 - 150mins mid or 90mins high</option>
+                                <option value="3">Level 3 - 240mins mid or 144mins high</option>
+                                <option value="4">Level 4 - 300mins mid or 180mins high</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_of_birth">Date of Birth</label>
+                            <input type="date" id="date_of_birth" name="date_of_birth" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Register</button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -143,34 +159,64 @@
                 }
             }
 
-            // 添加错误消息处理
+            function showLoginForm() {
+                document.getElementById('registerSuccess').style.display = 'none';
+                document.getElementById('loginRegisterForms').style.display = 'block';
+                showForm('login');
+            }
+
+            // 页面加载时检查登录状态和错误信息
             window.onload = function() {
-                // 获取URL参数
-                const urlParams = new URLSearchParams(window.location.search);
-                const error = urlParams.get('error');
+                checkLoginStatus();
                 
-                // 显示错误消息
-                if (error === 'invalid') {
-                    document.getElementById('loginError').innerHTML = 
-                        'Invalid email or password. Please try again.';
-                    document.getElementById('loginError').style.display = 'block';
-                    // 自动显示登录表单
-                    showForm('login');
-                } else if (error === 'system') {
-                    document.getElementById('loginError').innerHTML = 
-                        'System error. Please try again later.';
-                    document.getElementById('loginError').style.display = 'block';
-                    showForm('login');
-                } else if (error === 'email_exists') {
-                    document.getElementById('emailError').innerHTML = 
-                        'This email already exists. Please use a different email.';
-                    document.getElementById('emailError').style.display = 'block';
-                    document.querySelector('.form-group:has(#register-email)').classList.add('error');
-                    showForm('register');
-                } else if (urlParams.get('registered') === '1') {
-                    // 处理注册成功...
+                // 检查URL参数
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('registered') === 'success') {
+                    document.getElementById('loginRegisterForms').style.display = 'none';
+                    document.getElementById('registerSuccess').style.display = 'block';
+                } else {
+                    // 处理各种错误情况
+                    const error = urlParams.get('error');
+                    if (error === 'invalid') {
+                        document.getElementById('loginError').innerHTML = 
+                            'Invalid email or password. Please try again.';
+                        document.getElementById('loginError').style.display = 'block';
+                        showForm('login');
+                    } else if (error === 'system') {
+                        document.getElementById('loginError').innerHTML = 
+                            'System error. Please try again later.';
+                        document.getElementById('loginError').style.display = 'block';
+                        showForm('login');
+                    } else if (error === 'email_exists') {
+                        document.getElementById('emailError').innerHTML = 
+                            'Email already exists. Please use a different email.';
+                        document.getElementById('emailError').style.display = 'block';
+                        showForm('register');
+                    } else {
+                        showForm('login'); // 默认显示登录表单
+                    }
                 }
             };
+
+            // 检查登录状态的函数
+            function checkLoginStatus() {
+                fetch('backend/check_login_status.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Login status:', data);
+                        if (data.loggedIn) {
+                            document.getElementById('welcomeMessage').style.display = 'block';
+                            document.getElementById('loginRegisterForms').style.display = 'none';
+                            document.getElementById('userNameSpan').textContent = data.userName;
+                        } else {
+                            document.getElementById('welcomeMessage').style.display = 'none';
+                            document.getElementById('loginRegisterForms').style.display = 'block';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
         </script>
     </body>
 </html>

@@ -33,10 +33,12 @@ try {
         $_POST['date_of_birth']
     ]);
 
-    header('Location: ../account.html?registered=1');
+    // 注册成功，直接重定向
+    header('Location: ../account.html?registered=success');
     exit();
 
 } catch(PDOException $e) {
+    error_log('Registration error: ' . $e->getMessage());
     header('Location: ../account.html?error=system');
     exit();
 }
