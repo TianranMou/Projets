@@ -28,21 +28,60 @@ getUserBtn.addEventListener("click", () => {
   fetch('./backend/statis.php?action=user&user_id=2')
   .then(response => response.json())
   .then(data => {
-    const age = calculateAge(data.DATE_OF_BIRTH);
-    const height = data.HEIGHT;
-    const sportlevel = data.SPORT_VALUE;
+
+    const userdata = data.user_data[0];
+
+    const age = calculateAge(userdata.DATE_OF_BIRTH);
+    const height = userdata.HEIGHT;
+    const sportlevel = userdata.SPORT_VALUE;
 
     const{tdee,protein,carbs,fat}=calculateEnergy(age,height,weight,sportlevel)
-    console.log('TDEE:', tdee);
-    console.log('Protein:', protein);
-    console.log('Carbs:', carbs);
-    console.log('Fat:', fat);
+   
+  
 
-    document.getElementById("result").innerText =`
-    Daily Energy: ${tdee}kcal
-    Protein: ${protein}
-    Carbs: ${carbs}
-    Fat:${fat}g`;
+    const nutritionData = data.nutrition_data;
+    const actualConsumption = {
+      Energy: 0,
+      Protein: 0,
+      Carbohydrates:0,
+      Fats:0
+    };
+    
+
+    nutritionData.forEach((nutrition, index) => {
+      const averageDailyIntake = parseFloat(nutrition.average_daily_intake); 
+      
+      if (index == 1) { 
+        actualConsumption['Energy'] += averageDailyIntake;
+      } else if (index ==3) { 
+        actualConsumption['Protein'] += averageDailyIntake;      
+      } else if (index ==4 ||(index >= 6 && index < 13)) { 
+        actualConsumption['Carbohydrates'] += averageDailyIntake;
+      } else if (index == 5 ||(index >= 16 && index < 20)) {
+        actualConsumption['Fats'] += averageDailyIntake;
+    }
+
+    for (let key in actualConsumption) {
+      actualConsumption[key] = Math.floor(actualConsumption[key]);
+    }
+  
+    });
+
+
+   
+
+    const  tableBody = document.getElementById('nutrition')
+    const nutritiontable = [
+      { name:"Energy (kcal)",suggestion: tdee, actual: actualConsumption.Energy },
+      { name:"Protein (g)",suggestion: protein, actual: actualConsumption.Protein },
+      { name:"Carbihydrates (g)",suggestion: carbs, actual: actualConsumption.Carbohydrates },
+      { name:"Fats (g)",suggestion: fat, actual: actualConsumption.Fats }
+    ];
+    nutritiontable.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${item.name}</td><td>${item.suggestion}</td><td>${item.actual}</td>`;
+      tableBody.appendChild(row);
+    });
   })
   .catch(error => {
     console.error('Error fetching user data:', error);
@@ -106,6 +145,7 @@ function calculateEnergy(age,height,weight,sportlevel){
 
 
 
+
 function formatNutritionData(data) {
   const rootNode = {
     name: "root",
@@ -126,7 +166,6 @@ function formatNutritionData(data) {
   data.forEach((item, index) => {
     const { DICTIONARYNUTRITION, average_daily_intake } = item;
     
-
     if (index == 2) { 
       groupedData.Water.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
     } else if (index ==3) { 
@@ -145,6 +184,7 @@ function formatNutritionData(data) {
       groupedData.Vitamin.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
     }
   });
+
 
   for (const [key, value] of Object.entries(groupedData)) {
     if (value.length > 0) {

@@ -44,10 +44,9 @@ function get_daily_nutrition($pdo, $userid) {
 
 function get_userdata($pdo,$userid){
     if (isset($userid)){
-        $sql="SELECT DATE_OF_BRITH, SPORT_VALUE, HEIGHT
+        $sql="SELECT DATE_OF_BIRTH, SPORT_VALUE, HEIGHT
         FROM user
-        WHERE ID_USER = :id_user
-        ";
+        WHERE ID_USER = :id_user";
         $stmt = $pdo ->prepare($sql);
         $stmt->bindParam(':id_user', $userid, PDO::PARAM_INT);
         $stmt->execute();
@@ -115,9 +114,14 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
         case 'user':
             $user_data = get_userdata($pdo, $userid);
-            if ($user_data !== null) {
+            $nutrition_data = get_daily_nutrition($pdo,$userid);
+            if ($user_data !== null && $nutrition_data !== null) {
                 http_response_code(200);
-                echo json_encode($user_data);
+                $response = [
+                    'user_data' => $user_data,
+                    'nutrition_data' => $nutrition_data
+                ];
+                echo json_encode($response);
             } else {
                 http_response_code(404);
                 echo json_encode(['error' => 'User not found']);
