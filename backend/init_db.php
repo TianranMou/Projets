@@ -1,10 +1,11 @@
 <?php
 
+
 $host = 'localhost';  
 $user = 'root';  
 $password = 'root';  
-$dbname = '1234';  
-$sqlFilePath = 'createdb.sql';  
+$dbname = 'tptest';  //u can enter ur name prefer but dont forget to change also in pdo.php
+$sqlFilePath = 'creatdb.sql';  
 
 try {
 
