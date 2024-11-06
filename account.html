@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="css/login.css">
         <link rel="stylesheet" type="text/css" href="css/register.css">
         <script src="js/md5.min.js"></script>
+        <script src="js/account.js"></script>
     </head>
    
     <body>
@@ -47,6 +48,7 @@
             <!-- Welcome message -->
             <div id="welcomeMessage" class="form-container" style="display: none;">
                 <h2>Bonjour, <span id="userNameSpan"></span></h2>
+                <table id="usersTableBody"></table>
                 <form action="backend/logout.php" method="POST">
                     <button type="submit" class="submit-btn">Se déconnecter</button>
                 </form>
@@ -68,8 +70,8 @@
             <!-- Form -->
             <div id="loginRegisterForms">
                 <div class="form-tabs">
-                    <button class="tab-button active" onclick="showForm('login')">Login</button>
-                    <button class="tab-button" onclick="showForm('register')">Register</button>
+                    <button class="tab-button active" onclick="showForm('login')">Se connecter</button>
+                    <button class="tab-button" onclick="showForm('register')">Registre</button>
                 </div>
 
                 <!-- Login Form -->
@@ -235,6 +237,10 @@
                             document.getElementById('welcomeMessage').style.display = 'block';
                             document.getElementById('loginRegisterForms').style.display = 'none';
                             document.getElementById('userNameSpan').textContent = data.userName;
+                            
+                            get_userinfo();
+
+
                         } else {
                             document.getElementById('welcomeMessage').style.display = 'none';
                             document.getElementById('loginRegisterForms').style.display = 'block';
