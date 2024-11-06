@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const getDataBtn = document.getElementById('getNutData');
 
 getDataBtn.addEventListener('click', () => {
-  fetch('./backend/statis.php?action=nutrition&user_id=2')
+  fetch('./backend/statis.php?action=nutrition')
     .then(response => response.json())
     .then(data => {
 
@@ -25,7 +25,7 @@ getUserBtn.addEventListener("click", () => {
       return;
   }
 
-  fetch('./backend/statis.php?action=user&user_id=2')
+  fetch('./backend/statis.php?action=user')
   .then(response => response.json())
   .then(data => {
 

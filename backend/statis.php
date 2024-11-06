@@ -84,6 +84,11 @@ function get_top5food($pdo, $userid) {
 }
 
 
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+    echo json_encode(['error' => '请先登录']);
+    exit();
+}
 
 
 function setHeaders() {
@@ -98,7 +103,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     case 'GET':
         $action = isset($_GET['action']) ? $_GET['action'] : null;
-        $userid = isset($_GET['user_id']) ? $_GET['user_id'] : null;
+        $userId = $_SESSION['user_id'];
 
     switch ($action) {
         case 'nutrition':
