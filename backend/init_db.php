@@ -1,16 +1,16 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-echo "PHP正在运行<br>";
+$dbname = 'output'
 
 try {
-    echo "当前目录: " . getcwd() . "<br>";
     
-    // 使用正确的账号密码
+    
     $pdo = new PDO('mysql:host=localhost', 'root', 'root');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "数据库连接成功<br>";
+    
+    $pdo ->exec("CREATE DATABASE `$dbname`");
+    $pdo ->exec("USE `$dbname`");
+
     
     $sqlFile = './createdb.sql';
     if (!file_exists($sqlFile)) {
