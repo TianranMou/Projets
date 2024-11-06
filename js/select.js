@@ -13,7 +13,7 @@ function loadGroups() {
         .then(response => response.json())
         .then(data => {
             const foodGroupSelect = document.getElementById("foodGroup");
-            foodGroupSelect.innerHTML = '<option value="">choose</option>';
+            foodGroupSelect.innerHTML = '<option value="">choisir</option>';
             data.forEach(group => {
                 const option = document.createElement("option");
                 option.value = group.ID_GROUP;
@@ -33,7 +33,7 @@ function loadSubGroup() {
         .then(response => response.json())
         .then(data => {
             const foodSubGroupSelect = document.getElementById("foodSubGroup");
-            foodSubGroupSelect.innerHTML = '<option value="">choose</option>';
+            foodSubGroupSelect.innerHTML = '<option value="">choisir</option>';
             data.forEach(subGroup => {
                 const option = document.createElement("option");
                 option.value = subGroup.ID_SUBGROUP;
@@ -53,7 +53,7 @@ function loadSubSubGroup() {
         .then(response => response.json())
         .then(data => {
             const foodSubSubGroupSelect = document.getElementById("foodSubSubGroup");
-            foodSubSubGroupSelect.innerHTML = '<option value="">choose</option>';
+            foodSubSubGroupSelect.innerHTML = '<option value="">choisir</option>';
             data.forEach(subSubGroup => {
                 const option = document.createElement("option");
                 option.value = subSubGroup.ID_SUBSUBGROUP;
@@ -120,9 +120,9 @@ function addItemDirectly(id, name) {
     
     if (quantity && !isNaN(quantity) && quantity > 0) {
         addItem(id, name, quantity);
-        quantityInput.value = 1; // 重置输入框为默认值
+        quantityInput.value = 1; 
     } else {
-        alert("请输入有效的数量");
+        alert("Veuillez entrer une quantité valide");
     }
 }
 
@@ -130,7 +130,7 @@ function addItemDirectly(id, name) {
 function addItem(id, name,quantity) {
         addedItems.push({ id, name, quantity}); 
         renderAddedItems(); 
-        alert("add successfully");
+        alert("Ajouter avec succès");
 }
 
 //
@@ -143,8 +143,8 @@ function renderAddedItems() {
             <td>${item.name}</td>
             <td class="quantity-cell">${item.quantity}</td>
              <td>
-                <button onclick="deleteItem(${index})">Delete</button>
-                <button class="edit-button" onclick="editItem(${index})">Modify</button>
+                <button onclick="deleteItem(${index})">Supprimer</button>
+                <button class="edit-button" onclick="editItem(${index})">Modifier</button>
             </td>
         </tr>`;
         addedTableBody.insertAdjacentHTML('beforeend', newRow);
@@ -162,7 +162,7 @@ function editItem(index) {
     const editButton = itemRow.querySelector('.edit-button');
 
     quantityCell.innerHTML = `<input type="number" value="${addedItems[index].quantity}" min="1" id="edit-quantity-${index}">`;
-    editButton.textContent = 'Save';
+    editButton.textContent = 'Enregistrer';
     editButton.onclick = function() {
         saveItem(index); 
     };
@@ -175,14 +175,14 @@ function saveItem(index) {
         addedItems[index].quantity = parseInt(newQuantity); 
         renderAddedItems(); 
     } else {
-        alert("enter quantity");
+        alert("Entrez la quantité");
     }
 }
 
 function searchFood() {
     const foodName = document.getElementById("foodSearchInput").value.trim();
     if (!foodName) {
-        alert("Enter the name");
+        alert("entrez le nom");
         return;
     }
 
@@ -203,7 +203,7 @@ function submitSelectedItems() {
     const mealTimeInput = document.getElementById("mealTime").value;
     const formattedMealTime = formatMealTime(mealTimeInput);
     if (!mealTimeInput) {
-        alert("When u eat?");
+        alert("Quand vous mangez ?");
         return;
     }
     const payload = {
@@ -225,12 +225,12 @@ function submitSelectedItems() {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            alert("sucessful");
+            alert("succès");
             addedItems = []; 
             renderAddedItems(); 
             document.getElementById("mealTime").value = ''; 
         } else {
-            alert("failed, retry");
+            alert("échoué, réessayez");
         }
     })
     .catch(error => console.error("Error submitting selected items:", error));

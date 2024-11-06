@@ -4,7 +4,7 @@
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> -->
-    <title>tabletest</title>
+    <title>Ajouter</title>
     <link rel="stylesheet" type="text/css" href="css/tpcommon.css">
     <link rel="stylesheet" type="text/css" href="css/add.css">
     <script tyle="text/javascript" src="./js/select.js"></script>
@@ -14,11 +14,11 @@
         <div class="hidden header">
             <div class="pr container tc">
                 <ul class="hidden style nav">
-                    <li><a href='tpindex.html'>Home</a></li>
+                    <li><a href='tpindex.html'>Acceuil</a></li>
                     <li><a href="consomationdetail.html" mark="product">Consomation</a></li>
-                    <li><a href="nutritionstatistic.html" mark="product">Statistic</a></li>
+                    <li><a href="nutritionstatistic.html" mark="product">Statistique</a></li>
                     <li><a href="contact.html" mark="product">Contact</a></li>
-                    <li><a href="account.html" mark="product">Account</a></li>
+                    <li><a href="account.html" mark="product">Compte</a></li>
                 </ul>
                 <div class="clear"></div> 
                 <div class="floatr"></div>
@@ -32,11 +32,11 @@
             <div class="menubox" id="menubox">
                 <span id="index_close" onclick="hidemenu()">x</span>
                 <ul class="menus-list">
-                    <li class=""><a href='tpindex.html'>Home</a></li>
-                    <li><a href="consomationdetail.html" mark="product">My consomation</a></li>
-                    <li><a href="nutritionstatistic.html" mark="product">Statistic</a></li>
+                    <li class=""><a href='tpindex.html'>Acceuil</a></li>
+                    <li><a href="consomationdetail.html" mark="product">Consomation</a></li>
+                    <li><a href="nutritionstatistic.html" mark="product">Statistique</a></li>
                     <li><a href="contact.html" mark="product">Contact</a></li>
-                    <li><a href="account.html" mark="product">My account</a></li>
+                    <li><a href="account.html" mark="product">Compte</a></li>
                 </ul>
             </div>
             <script language="javascript">
@@ -50,61 +50,61 @@
         </div>
         <!-- nav module end -->
     <div class="search-part">
-        <label for="mealTime"> when u eat ?</label>
+        <label for="mealTime"> Quand vous mangez ?</label>
         <input type="datetime-local" id="mealTime">
-        <h2> Food already select</h2>
+        <h2> Nourritures déjà sélectionnés</h2>
     <table>
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Quantity</th>
+                <th>Nom</th>
+                <th>Quantité</th>
                 <th></th>
             </tr>
         </thead>
         <tbody id="addedItemsTableBody"></tbody>
     </table>
 
-    <button onclick="submitSelectedItems()">Submit</button>
+    <button onclick="submitSelectedItems()">Soumettre</button>
 
-    <h2>choose the food</h2>
+    <h2>Choisir la nourriture</h2>
     
     <!--  -->
-    <label for="foodGroup">FoodGroup:</label>
+    <label for="foodGroup">Groupe Alimentaire:</label>
     <select id="foodGroup" onchange="loadSubGroup()">
         <option value="">choose</option>
     </select>
     
     <!--  -->
-    <label for="foodSubGroup">Foodsubgroup:</label>
+    <label for="foodSubGroup">Sous-groupe alimentaire:</label>
     <select id="foodSubGroup" onchange="loadSubSubGroup()">
         <option value="">choose</option>
     </select>
     
-    <label for="foodSubSubGroup">Foodsubsubgroup:</label>
+    <label for="foodSubSubGroup">Sous-sous-groupe alimentaire:</label>
     <select id="foodSubSubGroup" onchange="loadFoodItems()">
         <option value="">choose</option>
     </select>
 
-    <h2>Not find? try search</h2>
-    <input type="text" id="foodSearchInput" placeholder="Enter the name">
+    <h2>Vous ne trouvez pas ? Essayez de rechercher</h2>
+    <input type="text" id="foodSearchInput" placeholder="Entrez le nom">
     <button onclick="searchFood()">Search</button>
 
     <!--  -->
-    <h3>list</h3>
+    <h3>liste</h3>
     <table>
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Add<th>
+                <th>Nom</th>
+                <th>Ajouter<th>
             </tr>
         </thead>
         <tbody id="foodItemsTableBody"></tbody>
     </table>
 
     <div class="pagination">
-        <button id="prevPageBtn" onclick="changePage(-1)" disabled>previous</button>
+        <button id="prevPageBtn" onclick="changePage(-1)" disabled>précédente</button>
         <span id="currentPageLabel"> 1 </span>
-        <button id="nextPageBtn" onclick="changePage(1)" disabled>next</button>
+        <button id="nextPageBtn" onclick="changePage(1)" disabled>suivante</button>
     </div>
 
 

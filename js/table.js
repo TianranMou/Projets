@@ -16,7 +16,7 @@ function getData() {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('请求失败');
+            throw new Error('failed');
         }
         return response.json();
     })
@@ -30,7 +30,7 @@ function getData() {
             tableBody.innerHTML = `
                 <tr>
                     <td colspan="3" style="text-align: center; padding: 20px;">
-                        暂无餐食记录，点击 "Add New Meal" 添加新的餐食
+                        Il n'y a pas encore d'enregistrement de repas, cliquez sur "Ajouter un nouveau repas" pour ajouter un nouveau repas
                     </td>
                 </tr>
             `;
@@ -101,7 +101,7 @@ function searchMeals(query) {
             tableBody.innerHTML = `
                 <tr>
                     <td colspan="3" style="text-align: center; padding: 20px;">
-                        can not find
+                        Ne trouve pas
                     </td>
                 </tr>
             `;
@@ -196,8 +196,8 @@ function editMeal(index, event) {
     });
 
     const actionCell = document.querySelector(`#action-row-${index} td`);
-    actionCell.innerHTML = `<button onclick="saveMeal(${index}, event)">Save</button>
-                           <button onclick="cancelEdit(${index}, event)">Cancel</button>`;
+    actionCell.innerHTML = `<button onclick="saveMeal(${index}, event)">Enregister</button>
+                           <button onclick="cancelEdit(${index}, event)">Annuler</button>`;
 
     function handleClickOutside(e) {
         const editRow = row;
@@ -211,8 +211,8 @@ function editMeal(index, event) {
             foodCell.textContent = row.dataset.originalFood;
             quantityCell.textContent = row.dataset.originalQuantity;
 
-            actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modify</button>
-                                  <button onclick="deleteMeal(${index}, event)">Delete</button>`;
+            actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modifier</button>
+                                  <button onclick="deleteMeal(${index}, event)">Supprimer</button>`;
 
             if (dropdown) {
                 dropdown.remove();
@@ -262,7 +262,7 @@ function saveMeal(index) {
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
-        alert('更新失败');
+        alert('failed');
     });
 }
 
@@ -296,7 +296,7 @@ function deleteMeal(index) {
             tableBody.innerHTML = `
                 <tr>
                     <td colspan="3" style="text-align: center; padding: 20px;">
-                        暂无餐食记录，点击 "Add New Meal" 添加新的餐食
+                         Il n'y a pas encore d'enregistrement de repas, cliquez sur "Ajouter un nouveau repas" pour ajouter un nouveau repas
                     </td>
                 </tr>
             `;
@@ -304,7 +304,7 @@ function deleteMeal(index) {
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
-        alert('删除���败');
+        alert('failed');
     });
 }
 
