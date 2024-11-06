@@ -5,34 +5,39 @@ table {
     margin: 20px auto;
     border-collapse: collapse;
     background-color: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增强阴影效果 */
+    border-radius: 8px; /* 添加圆角 */
+    overflow: hidden; /* 确保圆角效果可见 */
 }
 
 caption {
-    font-size: 2em;
-    padding: 20px;
+    font-size: 2.4em; /* 增大标题字体 */
+    padding: 25px;
     font-weight: bold;
     color: #000;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 添加文字阴影 */
 }
 
 th, td {
-    padding: 15px;
+    padding: 18px; /* 增加内边距 */
     text-align: left;
     border-bottom: 1px solid #ddd;
     color: #000;
-    font-size: 1.2em;
-    line-height: 1.4;
+    font-size: 1.4em; /* 增大字体 */
+    line-height: 1.5;
 }
 
 th {
     background-color: #000;
     color: white;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1.5em; /* 表头字体更大 */
 }
 
 tr:hover {
-    background-color: #f5f5f5;
-    transition: background-color 0.3s ease;
+    background-color: #f8f8f8;
+    transition: all 0.3s ease;
+    transform: scale(1.01); /* 悬停时轻微放大效果 */
 }
 
 /* 搜索区域样式 */

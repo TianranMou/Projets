@@ -31,11 +31,11 @@ function get_userinfo(){
         NAME : "Nom",
         DATE_OF_BIRTH :"Date de naissance",
         PWD:"PWD",
-        EMAIL:"Email",
-        Height:"Hauteur(cm)"
+        email:"email",
+        height:"Hauteur(cm)"
     };
 
-    const displayOrder= ["SURNAME","NAME","ID_USER","ID_SEXE","DATE_OF_BIRTH","EMAIL","SPORT_VALUE","Height"]
+    const displayOrder= ["SURNAME","NAME","ID_USER","ID_SEXE","DATE_OF_BIRTH","email","SPORT_VALUE","height"]
 
         data.forEach((user) => {
             displayOrder.forEach((key,index) => {
@@ -106,7 +106,7 @@ function edituser(index, event) {
         case 'Nom':
             inputHTML = `<input type="text" id="edit-name-${index}" value="${cells[1].textContent}" required>`;
             break;
-        case 'Email':
+        case 'email':
             inputHTML = `<input type="email" id="edit-email-${index}" value="${cells[1].textContent}" required>`;
             break;
         case 'Gendre':
@@ -187,10 +187,10 @@ function saveField(index, event) {
     const fieldMapping = {
         'Prénom': 'SURNAME',
         'Nom': 'NAME',
-        'Email': 'EMAIL',
+        'email': 'email',
         'Gendre': 'ID_SEXE',
         'Fréquence de sport': 'SPORT_VALUE',
-        'Hauteur (cm)': 'Height',
+        'Hauteur (cm)': 'height',
         'Date de naissance': 'DATE_OF_BIRTH'
     };
 
@@ -203,7 +203,7 @@ function saveField(index, event) {
         updatedValue = document.getElementById(`edit-surname-${index}`).value;
     } else if (fieldName === 'Nom') {
         updatedValue = document.getElementById(`edit-name-${index}`).value;
-    } else if (fieldName === 'Email') {
+    } else if (fieldName === 'email') {
         updatedValue = document.getElementById(`edit-email-${index}`).value;
     } else if (fieldName === 'Gendre') {
         updatedValue = document.getElementById(`edit-gender-${index}`).value;
