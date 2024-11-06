@@ -262,7 +262,7 @@ function saveMeal(index) {
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
-        alert('更新失败');
+        alert('failed');
     });
 }
 
@@ -296,7 +296,7 @@ function deleteMeal(index) {
             tableBody.innerHTML = `
                 <tr>
                     <td colspan="3" style="text-align: center; padding: 20px;">
-                        暂无餐食记录，点击 "Add New Meal" 添加新的餐食
+                         Il n'y a pas encore d'enregistrement de repas, cliquez sur "Ajouter un nouveau repas" pour ajouter un nouveau repas
                     </td>
                 </tr>
             `;
@@ -304,7 +304,7 @@ function deleteMeal(index) {
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
-        alert('删除���败');
+        alert('failed');
     });
 }
 
