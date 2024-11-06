@@ -55,8 +55,8 @@ function loadTable(meals) {
 
         <tr id="action-row-${index}" class="action-row" style="display: none;">
             <td colspan="3">
-                <button onclick="editMeal(${index}, event)">Modify</button>
-                <button onclick="deleteMeal(${index}, event)">Delete</button>
+                <button onclick="editMeal(${index}, event)">Modifier</button>
+                <button onclick="deleteMeal(${index}, event)">Supprimer</button>
             </td>
         </tr>`
         tableBody.insertAdjacentHTML('beforeend', newRow);
@@ -175,24 +175,38 @@ function editMeal(index, event) {
                 .then(response => response.json())
                 .then(data => {
                     dropdown.innerHTML = '';
-                    data.forEach(food => {
-                        const item = document.createElement('li');
-                        item.textContent = food.FOOD_NAME;
-                        item.style.cursor = 'pointer';
-                        item.style.padding = '5px';
-                        item.style.borderBottom = '1px solid #ddd';
-                        item.addEventListener('click', () => {
-                            input.value = food.FOOD_NAME;
-                            selectedFoodId = food.ID_FOOD;
-                            dropdown.innerHTML = '';
+                    if (data && data.length > 0) {
+                        dropdown.style.display = 'block';
+                        data.forEach(food => {
+                            const item = document.createElement('li');
+                            item.textContent = food.FOOD_NAME;
+                            item.style.cursor = 'pointer';
+                            item.style.padding = '5px';
+                            item.style.borderBottom = '1px solid #ddd';
+                            item.addEventListener('click', () => {
+                                input.value = food.FOOD_NAME;
+                                selectedFoodId = food.ID_FOOD;
+                                dropdown.style.display = 'none';
+                            });
+                            dropdown.appendChild(item);
                         });
-                        dropdown.appendChild(item);
-                    });
+                    } else {
+                        dropdown.style.display = 'none';
+                    }
                 })
-                .catch(error => console.error('Error fetching food data:', error));
+                .catch(error => {
+                    console.error('Error fetching food data:', error);
+                    dropdown.style.display = 'none';
+                });
         } else {
-            dropdown.innerHTML = '';
+            dropdown.style.display = 'none';
         }
+    });
+
+    input.addEventListener('blur', function(e) {
+        setTimeout(() => {
+            dropdown.style.display = 'none';
+        }, 200);
     });
 
     const actionCell = document.querySelector(`#action-row-${index} td`);
@@ -320,8 +334,8 @@ function cancelEdit(index, event) {
     quantityCell.textContent = row.dataset.originalQuantity;
 
     const actionCell = document.querySelector(`#action-row-${index} td`);
-    actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modify</button>
-                           <button onclick="deleteMeal(${index}, event)">Delete</button>`;
+    actionCell.innerHTML = `<button onclick="editMeal(${index}, event)">Modifier</button>
+                           <button onclick="deleteMeal(${index}, event)">Supprimer</button>`;
 
     const dropdown = document.getElementById(`dropdown-${index}`);
     if (dropdown) {

@@ -20,7 +20,8 @@ th, td {
     text-align: left;
     border-bottom: 1px solid #ddd;
     color: #000;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    line-height: 1.4;
 }
 
 th {
@@ -74,22 +75,25 @@ button:hover {
 /* 操作按钮行样式 */
 .action-row {
     background-color: #f9f9f9;
+    text-align: center;
 }
 
 .action-row button {
-    margin: 5px;
-    padding: 8px 15px;
+    margin: 8px;
+    padding: 10px 20px;
     background-color: #000;
+    min-width: 120px;
 }
 
 /* 编辑模式输入框样式 */
 input[type="text"],
 input[type="number"],
 input[type="date"] {
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 90%;
+    font-size: 1.1em;
 }
 
 /* 响应式设计 */
