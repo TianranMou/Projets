@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("pdo.php");
 
 
@@ -86,7 +87,7 @@ function get_top5food($pdo, $userid) {
 
 if (!isset($_SESSION['user_id'])) {
     http_response_code(401);
-    echo json_encode(['error' => '请先登录']);
+    echo json_encode(['error' => 'login first']);
     exit();
 }
 
@@ -103,7 +104,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     case 'GET':
         $action = isset($_GET['action']) ? $_GET['action'] : null;
-        $userId = $_SESSION['user_id'];
+        $userid = $_SESSION['user_id'];
 
     switch ($action) {
         case 'nutrition':
