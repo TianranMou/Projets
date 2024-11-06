@@ -78,11 +78,16 @@ button:hover {
     text-align: center;
 }
 
+.action-row td {
+    text-align: center; /* 确保td也是居中的 */
+}
+
 .action-row button {
     margin: 8px;
     padding: 10px 20px;
     background-color: #000;
     min-width: 120px;
+    display: inline-block; /* 确保按钮能够水平排列 */
 }
 
 /* 编辑模式输入框样式 */
