@@ -14,11 +14,11 @@
         <div class="hidden header">
             <div class="pr container tc">
                 <ul class="hidden style nav">
-                    <li><a href='tpindex.html'>Home</a></li>
+                    <li><a href='tpindex.html'>Acceuil</a></li>
                     <li><a href="consomationdetail.html" mark="product">Consomation</a></li>
-                    <li><a href="nutritionstatistic.html" mark="product">Statistic</a></li>
+                    <li><a href="nutritionstatistic.html" mark="product">Statistique</a></li>
                     <li><a href="contact.html" mark="product">Contact</a></li>
-                    <li class="active"><a href="account.html" mark="product">Account</a></li>
+                    <li class="active"><a href="account.html" mark="product">Compte</a></li>
                 </ul>
                 <div class="clear"></div> 
                 <div class="floatr"></div>
@@ -31,11 +31,11 @@
             <div class="menubox" id="menubox">
                 <span id="index_close" onclick="hidemenu()">x</span>
                 <ul class="menus-list">
-                    <li class=""><a href='tpindex.html'>Home</a></li>
-                    <li><a href="consomationdetail.html" mark="product">My consomation</a></li>
-                    <li><a href="nutritionstatistic.html" mark="product">Statistic</a></li>
+                    <li class=""><a href='tpindex.html'>Acceuil</a></li>
+                    <li><a href="consomationdetail.html" mark="product">Consomation</a></li>
+                    <li><a href="nutritionstatistic.html" mark="product">Statistique</a></li>
                     <li><a href="contact.html" mark="product">Contact</a></li>
-                    <li><a href="account.html" mark="product">My account</a></li>
+                    <li><a href="account.html" mark="product">Compte</a></li>
                 </ul>
             </div>
         </div>
@@ -43,28 +43,28 @@
 
         <!-- Account Forms Container -->
         <div class="account-container">
-            <!-- 欢迎信息容器 -->
+            <!-- Welcome message -->
             <div id="welcomeMessage" class="form-container" style="display: none;">
-                <h2>Hello, <span id="userNameSpan"></span></h2>
+                <h2>Bonjour, <span id="userNameSpan"></span></h2>
                 <form action="backend/logout.php" method="POST">
-                    <button type="submit" class="submit-btn">Logout</button>
+                    <button type="submit" class="submit-btn">Se déconnecter</button>
                 </form>
             </div>
 
-            <!-- 注册成功消息 -->
+            <!-- register message -->
             <div id="registerSuccess" class="form-container" style="display: none;">
-                <h2>Registration Successful!</h2>
-                <p>You can now login with your credentials.</p>
-                <button type="button" class="submit-btn" onclick="showLoginForm()">Go to Login</button>
+                <h2>Inscription réussie !</h2>
+                <p>Vous pouvez désormais vous connecter avec vos identifiants.</p>
+                <button type="button" class="submit-btn" onclick="showLoginForm()">Se connecter</button>
             </div>
 
-            <!-- 登录提示框 -->
+            <!-- prompt Need login -->
             <div id="loginPrompt" class="form-container" style="display: none;">
-                <h2>Please login first</h2>
+                <h2>Veuillez d'abord vous connecter</h2>
                 <button type="button" class="submit-btn" onclick="hideLoginPrompt()">OK</button>
             </div>
 
-            <!-- 登录注册表单容器 -->
+            <!-- Form -->
             <div id="loginRegisterForms">
                 <div class="form-tabs">
                     <button class="tab-button active" onclick="showForm('login')">Login</button>
@@ -79,11 +79,11 @@
                             <input type="email" id="login-email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="login-password">Password</label>
+                            <label for="login-password">Mot de passe</label>
                             <input type="password" id="login-password" name="password" required>
                             <div id="loginError" class="error-message"></div>
                         </div>
-                        <button type="submit" class="submit-btn">Login</button>
+                        <button type="submit" class="submit-btn">Se connecter</button>
                     </form>
                 </div>
 
@@ -118,16 +118,16 @@
                         <div class="form-group">
                             <label for="sport_value">Sport Level</label>
                             <select id="sport_value" name="sport_value" required>
-                                <option value="" disabled selected>Select your sport level</option>
-                                <option value="0">Level 0 - Not sport at all</option>
-                                <option value="1">Level 1 - 90mins mid or 45mins high</option>
-                                <option value="2">Level 2 - 150mins mid or 90mins high</option>
-                                <option value="3">Level 3 - 240mins mid or 144mins high</option>
-                                <option value="4">Level 4 - 300mins mid or 180mins high</option>
+                                <option value="" disabled selected>Choisissez votre fréquence de sport</option>
+                                <option value="0">Level 0 - Pas du tout</option>
+                                <option value="1">Level 1 - Exercice léger 1 à 3 jours par semaine</option>
+                                <option value="2">Level 2 - Exercice modéré 3 à 5 jours par semaine</option>
+                                <option value="3">Level 3 - Exercice d'intensité 6 à 7 jours par semaine</option>
+                                <option value="4">Level 4 - Travail physique ou entraînement deux fois/jour</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="height">Height (cm)</label>
+                            <label for="height">Hauteur (cm)</label>
                             <input type="number" 
                                    id="height" 
                                    name="height" 
@@ -137,10 +137,10 @@
                                    placeholder="Enter your height in cm">
                         </div>
                         <div class="form-group">
-                            <label for="date_of_birth">Date of Birth</label>
+                            <label for="date_of_birth">Date de naissance</label>
                             <input type="date" id="date_of_birth" name="date_of_birth" required>
                         </div>
-                        <button type="submit" class="submit-btn">Register</button>
+                        <button type="submit" class="submit-btn">Registre</button>
                     </form>
                 </div>
             </div>
@@ -187,11 +187,10 @@
                 showForm('login');
             }
 
-            // 页面加载时检查登录状态和错误信息
+            // Check login status when loaded
             window.onload = function() {
                 checkLoginStatus();
                 
-                // 检查URL参数
                 const urlParams = new URLSearchParams(window.location.search);
                 if (urlParams.get('needLogin') === 'true') {
                     document.getElementById('loginPrompt').style.display = 'block';
@@ -203,7 +202,6 @@
                     document.getElementById('loginRegisterForms').style.display = 'none';
                     document.getElementById('registerSuccess').style.display = 'block';
                 } else {
-                    // 处理各种错误情况
                     const error = urlParams.get('error');
                     if (error === 'invalid') {
                         document.getElementById('loginError').innerHTML = 
@@ -221,12 +219,12 @@
                         document.getElementById('emailError').style.display = 'block';
                         showForm('register');
                     } else {
-                        showForm('login'); // 默认显示登录表单
+                        showForm('login'); 
                     }
                 }
             };
 
-            // 检查登录状态的函数
+            // check login status
             function checkLoginStatus() {
                 fetch('backend/check_login_status.php')
                     .then(response => response.json())

@@ -10,7 +10,7 @@ CREATE TABLE `user` (
   `SPORT_VALUE` int(11) NOT NULL,
   `SURNAME` varchar(255) NOT NULL,
   `NAME` varchar(255) NOT NULL,
-  `DATE_OF_BRITH` date NOT NULL,
+  `DATE_OF_BIRTH` date NOT NULL,
   `PWD` varchar(255) NOT NULL,
   `EMAIL` varchar(255) NOT NULL,
   PRIMARY KEY (`ID_USER`),

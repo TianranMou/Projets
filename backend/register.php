@@ -20,7 +20,7 @@ try {
     }
 
     // 邮箱不存在，继续注册流程
-    $stmt = $pdo->prepare("INSERT INTO user (SURNAME, NAME, EMAIL, PWD, ID_SEXE, SPORT_VALUE, DATE_OF_BRITH, HEIGHT) 
+    $stmt = $pdo->prepare("INSERT INTO user (SURNAME, NAME, EMAIL, PWD, ID_SEXE, SPORT_VALUE, DATE_OF_BIRTH, HEIGHT) 
                           VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     
     $stmt->execute([

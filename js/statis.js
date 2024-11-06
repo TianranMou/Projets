@@ -65,11 +65,7 @@ getUserBtn.addEventListener("click", () => {
       actualConsumption[key] = Math.floor(actualConsumption[key]);
     }
   
-    });
-
-
-   
-
+    });   
     const  tableBody = document.getElementById('nutrition')
     const nutritiontable = [
       { name:"Energy (kcal)",suggestion: tdee, actual: actualConsumption.Energy },
@@ -153,35 +149,35 @@ function formatNutritionData(data) {
   };
 
   const groupedData = {
-    Water: [],
-    Protein: [],
-    Carbohydrates:[],
-    Fiber:[],
-    Alcohol:[],
-    Fats:[],
-    Mineral:[],
-    Vitamin:[]
+    Eau: [],
+    Protéine: [],
+    Glucides:[],
+    Fibre:[],
+    Alcool:[],
+    Graisses:[],
+    Minéral:[],
+    Vitamine:[]
   };
 
   data.forEach((item, index) => {
     const { DICTIONARYNUTRITION, average_daily_intake } = item;
     
     if (index == 2) { 
-      groupedData.Water.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+      groupedData.Eau.push({ name: DICTIONARYNUTRITION, value: Math.round(average_daily_intake) });
     } else if (index ==3) { 
-      groupedData.Protein.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+      groupedData.Protéine.push({ name: DICTIONARYNUTRITION, value: Math.round(average_daily_intake) });
     } else if (index ==4 ||(index >= 6 && index < 13)) { 
-      groupedData.Carbohydrates.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+      groupedData.Glucides.push({ name: DICTIONARYNUTRITION, value: Math.round(average_daily_intake) });
     } else if (index == 14) { 
-      groupedData.Fiber.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+      groupedData.Fibre.push({ name: DICTIONARYNUTRITION, value: Math.round(average_daily_intake) });
     } else if (index ==15) {
-      groupedData.Alcohol.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+      groupedData.Alcool.push({ name: DICTIONARYNUTRITION, value: Math.round(average_daily_intake) });
     } else if (index == 5 ||(index >= 16 && index < 20)) {
-      groupedData.Fats.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+      groupedData.Graisses.push({ name: DICTIONARYNUTRITION, value: Math.round(average_daily_intake) });
     } else if (index >= 20 && index < 32) {
-      groupedData.Mineral.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+      groupedData.Minéral.push({ name: DICTIONARYNUTRITION, value: Math.round(average_daily_intake) });
     } else if (index >= 32 && index <38){
-      groupedData.Vitamin.push({ name: DICTIONARYNUTRITION, value: average_daily_intake });
+      groupedData.Vitamine.push({ name: DICTIONARYNUTRITION, value: Math.round(average_daily_intake) });
     }
   });
 
