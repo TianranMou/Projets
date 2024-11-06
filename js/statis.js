@@ -68,10 +68,10 @@ getUserBtn.addEventListener("click", () => {
     });   
     const  tableBody = document.getElementById('nutrition')
     const nutritiontable = [
-      { name:"Energy (kcal)",suggestion: tdee, actual: actualConsumption.Energy },
-      { name:"Protein (g)",suggestion: protein, actual: actualConsumption.Protein },
-      { name:"Carbihydrates (g)",suggestion: carbs, actual: actualConsumption.Carbohydrates },
-      { name:"Fats (g)",suggestion: fat, actual: actualConsumption.Fats }
+      { name:"Energie (kcal)",suggestion: tdee, actual: actualConsumption.Energy },
+      { name:"Protéine (g)",suggestion: protein, actual: actualConsumption.Protein },
+      { name:"Glucides (g)",suggestion: carbs, actual: actualConsumption.Carbohydrates },
+      { name:"Graisses (g)",suggestion: fat, actual: actualConsumption.Fats }
     ];
     nutritiontable.forEach(item => {
       const row = document.createElement('tr');

@@ -1,5 +1,4 @@
 
-// 立即执行登录检查，不等待window.onload
 (function() {
     fetch('backend/check_login_status.php')
         .then(response => response.json())
