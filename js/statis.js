@@ -295,20 +295,20 @@ function renderSunburstChart(data){
         .attr("fill-opacity", d => +labelVisible(d.current))
         .attr("transform", d => labelTransform(d.current))
         .style("font-size","14px")
-    label
+        label
         .append("tspan")
         .attr("x", 0)
         .attr("dy", "0.35em")
-        .text((d) => d.data.name);
-          
-    label
-        .append("tspan")
-        .attr("x", 0)
-        .attr("dy", "1.1em")
         .text((d) => {
-              const originalValue = d.data.value * (d.data.name.includes('mg') ? 1000 : (d.data.name.includes('µg') ? 1000000 : 1));
-              return d.data.value > 0 ? `${originalValue}` : '';
-        }); 
+          const nameWithUnit = d.data.name.replace(/\(.*?\/.*?\)/, (match) => {
+            return match.replace(/\/.*/, ')'); 
+          });
+            
+            const originalValue = d.data.value * (d.data.name.includes('mg') ? 1000 : (d.data.name.includes('µg') ? 1000000 : 1));
+          
+            return d.data.value > 0 ? `${nameWithUnit} : ${originalValue}` : nameWithUnit;
+          });
+    
 
     // 
     const parent = svg.append("circle")
