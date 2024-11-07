@@ -5,13 +5,13 @@ require_once("pdo.php");
 
 function get_daily_nutrition($pdo, $userid) {
     if (isset($userid)) {
-        $sql = "    SELECT nutrition.DICTIONARYNUTRITION, IFNULL(AVG(total_nutrient), 0) AS average_daily_intake
+        $sql = "    SELECT nutrition.DICTIONARYNUTRITION, IFNULL(AVG(daily_nutrient_totals.total_nutrient), 0) AS average_daily_intake
                     FROM 
                         nutrition
                     LEFT JOIN (
                         SELECT 
                             m.ID_USER,
-                            m.DATE_MEAL,
+                            DATE(m.DATE_MEAL) AS day_meal,
                             n.ID_NUTRITION,
                             SUM(n.QUANTITY_CHARACTERISTIC * c.QUANTITY_EAT / 100) AS total_nutrient
                         FROM 
@@ -25,7 +25,7 @@ function get_daily_nutrition($pdo, $userid) {
                         WHERE 
                             m.ID_USER = :id_user
                         GROUP BY 
-                            m.DATE_MEAL, m.ID_USER, n.ID_NUTRITION
+                            day_meal, m.ID_USER, n.ID_NUTRITION
                     ) AS daily_nutrient_totals 
                     ON daily_nutrient_totals.ID_NUTRITION = nutrition.ID_NUTRITION
                     GROUP BY 
