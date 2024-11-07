@@ -9,16 +9,15 @@ function setHeaders() {
     header('Content-type: application/json; charset=utf-8');
 }
 
-// 验证用户是否登录
 function checkAuth() {
     if (!isset($_SESSION['user_id'])) {
         http_response_code(401);
-        exit(json_encode(['error' => '请先登录']));
+        exit(json_encode(['error' => 'login first']));
     }
     return $_SESSION['user_id'];
 }
 
-// 验证meal是否属于当前用户
+
 function verifyMealOwnership($pdo, $meal_id, $user_id) {
     $sql = "SELECT COUNT(*) FROM meal WHERE ID_MEAL = :meal_id AND ID_USER = :user_id";
     $stmt = $pdo->prepare($sql);
@@ -33,7 +32,7 @@ function create_meal($pdo, $user_id, $meal_time, $items) {
     try {
         $pdo->beginTransaction();
         
-        // 创建meal记录
+        
         $sql = "INSERT INTO meal (ID_USER, DATE_MEAL) VALUES (:user_id, :meal_time)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':user_id', $user_id);
@@ -42,7 +41,7 @@ function create_meal($pdo, $user_id, $meal_time, $items) {
         
         $meal_id = $pdo->lastInsertId();
         
-        // 创建composition记录
+   
         $sql = "INSERT INTO composition (ID_MEAL, ID_FOOD, QUANTITY_EAT) 
                 VALUES (:meal_id, :food_id, :quantity_eat)";
         $stmt = $pdo->prepare($sql);
@@ -68,7 +67,7 @@ function update_meal($pdo, $meal_id, $meal_time, $food_id, $food_id_old, $quanti
     try {
         $pdo->beginTransaction();
         
-        // 更新meal表
+      
         $sql = "UPDATE meal 
                 SET DATE_MEAL = :meal_time 
                 WHERE ID_MEAL = :meal_id";
@@ -77,7 +76,7 @@ function update_meal($pdo, $meal_id, $meal_time, $food_id, $food_id_old, $quanti
         $stmt->bindParam(':meal_time', $meal_time);
         $stmt->execute();
         
-        // 更新composition表
+      
         $sql = "UPDATE composition 
                 SET ID_FOOD = :food_id_new, 
                     QUANTITY_EAT = :quantity_eat 
@@ -103,20 +102,18 @@ function delete_meal($pdo, $meal_id, $food_id) {
     try {
         $pdo->beginTransaction();
         
-        // 删除composition记录
+       
         $sql = "DELETE FROM composition WHERE ID_MEAL = :meal_id AND ID_FOOD = :food_id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':meal_id', $meal_id);
         $stmt->bindParam(':food_id', $food_id);
         $stmt->execute();
         
-        // 检查是否还有其他composition记录
         $sql = "SELECT COUNT(*) FROM composition WHERE ID_MEAL = :meal_id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':meal_id', $meal_id);
         $stmt->execute();
         
-        // 如果没有其他composition记录，删除meal记录
         if ($stmt->fetchColumn() == 0) {
             $sql = "DELETE FROM meal WHERE ID_MEAL = :meal_id";
             $stmt = $pdo->prepare($sql);
@@ -136,7 +133,7 @@ function delete_meal($pdo, $meal_id, $food_id) {
 
 try {
     setHeaders();
-    $current_user_id = checkAuth(); // 获取当前登录用户ID
+    $current_user_id = checkAuth(); 
     
     switch($_SERVER["REQUEST_METHOD"]) {
         case 'POST':
@@ -149,12 +146,12 @@ try {
                 http_response_code(201);
                 exit(json_encode([
                     'status' => 'success',
-                    'message' => '添加成功',
+                    'message' => 'success',
                     'meal_id' => $id
                 ]));
             } else {
                 http_response_code(400);
-                exit(json_encode(['error' => '请填写所有必要信息']));
+                exit(json_encode(['error' => 'Enter all message']));
             }
             break;
             
@@ -167,7 +164,7 @@ try {
                 // 
                 if (!verifyMealOwnership($pdo, $data['meal_id'], $current_user_id)) {
                     http_response_code(403);
-                    exit(json_encode(['error' => '无权操作此记录']));
+                    exit(json_encode(['error' => 'not authorized']));
                 }
                 
                 $success = update_meal($pdo,
@@ -182,21 +179,21 @@ try {
                     http_response_code(200);
                     exit(json_encode([
                         'status' => 'success',
-                        'message' => '更新成功'
+                        'message' => 'success'
                     ]));
                 }
             }
             http_response_code(400);
-            exit(json_encode(['error' => '请填写所有必要信息']));
+            exit(json_encode(['error' => 'enter all message']));
             break;
             
         case 'DELETE':
             $data = json_decode(file_get_contents("php://input"), true);
             if (isset($data['meal_id']) && isset($data['food_id'])) {
-                // 验证meal是否属于当前用户
+               
                 if (!verifyMealOwnership($pdo, $data['meal_id'], $current_user_id)) {
                     http_response_code(403);
-                    exit(json_encode(['error' => '无权操作此记录']));
+                    exit(json_encode(['error' => 'not authorizied']));
                 }
                 
                 $success = delete_meal($pdo, $data['meal_id'], $data['food_id']);
@@ -204,12 +201,12 @@ try {
                     http_response_code(200);
                     exit(json_encode([
                         'status' => 'success',
-                        'message' => '删除成功'
+                        'message' => 'success'
                     ]));
                 }
             }
             http_response_code(400);
-            exit(json_encode(['error' => '请提供餐食ID']));
+            exit(json_encode(['error' => 'please input']));
             break;
             
         case 'OPTIONS':
@@ -218,14 +215,14 @@ try {
             
         default:
             http_response_code(405);
-            exit(json_encode(['error' => '不支持的请求方法']));
+            exit(json_encode(['error' => 'not allowed method']));
     }
     
 } catch (Exception $e) {
     http_response_code(500);
     exit(json_encode([
         'status' => 'error',
-        'message' => '服务器错误: ' . $e->getMessage()
+        'message' => 'Sever error ' . $e->getMessage()
     ]));
 }
 ?>
