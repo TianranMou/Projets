@@ -6,7 +6,7 @@ let currentUserId = null;
 
 //send get request to db and return all users data
 function getData() {
-    fetch('./backend/getmeal.php', {
+    fetch('../backend/getmeal.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function searchMeals(query) {
-    fetch('./backend/getmeal.php', {
+    fetch('../backend/getmeal.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -171,7 +171,7 @@ function editMeal(index, event) {
     input.addEventListener('input', function () {
         const query = input.value.trim();
         if (query.length > 0) {
-            fetch(`./backend/group.php?search=${encodeURIComponent(query)}`)
+            fetch(`../backend/group.php?search=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
                     dropdown.innerHTML = '';
@@ -247,7 +247,7 @@ function saveMeal(index) {
     const quantityEat = document.getElementById(`edit-quantity-${index}`).value;
     const mealTime = document.getElementById(`edit-date-${index}`).value;
 
-    fetch('./backend/meal.php', {
+    fetch('../backend/meal.php', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -285,7 +285,7 @@ function deleteMeal(index) {
     const mealId = meal.ID_MEAL; 
     const foodId = meal.ID_FOOD; 
 
-    fetch('./backend/meal.php', {
+    fetch('../backend/meal.php', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
