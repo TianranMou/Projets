@@ -242,11 +242,12 @@ function saveField(index, event) {
             dicvalue = sportLevelMapping[updatedValue];
             valueCell.textContent = dicvalue;
         } else {
-            valueCell.textContent = dicvalue;
+
+            valueCell.textContent = updatedValue;
         };
 
         const actionCell = document.querySelector(`#action-row-${index} td`);
-        actionCell.innerHTML = `<button onclick="editUser(${index}, event)">Modifier</button>`;
+        actionCell.innerHTML = `<button onclick="edituser(${index}, event)">Modifier</button>`;
     });
 }
 
