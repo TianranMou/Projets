@@ -1,0 +1,187 @@
+/* 用户信息卡片容器 */
+#welcomeMessage {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#welcomeMessage:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* 欢迎标题 */
+#welcomeMessage h2 {
+    text-align: center;
+    font-size: 2.2em;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* 表格基本样式 */
+#usersTableBody {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 20px 0;
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+}
+
+/* 数据行样式 */
+.data-row {
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.data-row:hover {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.data-row td {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1em;
+}
+
+.data-row td:first-child {
+    font-weight: 600;
+    color: #495057;
+    width: 40%;
+    position: relative;
+    padding-left: 25px;
+}
+
+.data-row td:first-child::before {
+    content: '•';
+    position: absolute;
+    left: 10px;
+    color: #6c757d;
+}
+
+.data-row td:last-child {
+    color: #212529;
+}
+
+/* 操作行样式 */
+.action-row {
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+}
+
+.action-row td {
+    padding: 15px;
+    text-align: center;
+}
+
+/* 按钮样式 */
+.action-row button {
+    padding: 10px 25px;
+    margin: 0 8px;
+    background: #343a40;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.action-row button:hover {
+    background: #495057;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* 编辑模式输入框样式 */
+#usersTableBody input,
+#usersTableBody select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+#usersTableBody input:focus,
+#usersTableBody select:focus {
+    border-color: #495057;
+    outline: none;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(73, 80, 87, 0.1);
+}
+
+/* 退出按钮样式 */
+.submit-btn {
+    display: block;
+    width: 200px;
+    margin: 30px auto 0;
+    padding: 15px 0;
+    background: linear-gradient(to right, #343a40, #495057);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    background: linear-gradient(to right, #495057, #343a40);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    #welcomeMessage {
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .data-row td {
+        padding: 15px;
+        font-size: 1em;
+    }
+    
+    .action-row button {
+        padding: 8px 20px;
+        font-size: 0.9em;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#welcomeMessage {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* 表格行交替颜色 */
+.data-row:nth-child(4n+1),
+.data-row:nth-child(4n+2) {
+    background-color: #f8f9fa;
+}
