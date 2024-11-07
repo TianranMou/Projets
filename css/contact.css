@@ -67,7 +67,7 @@
     font-style: normal;
 }
 
-/* 响应式设计 */
+
 @media (max-width: 768px) {
     .contact-card {
         width: 100%;

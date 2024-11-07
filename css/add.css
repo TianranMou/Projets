@@ -1,4 +1,4 @@
-/* 主容器样式 */
+/* main container*/
 .search-part {
     width: 90%;
     max-width: 800px;
@@ -8,7 +8,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 标题样式 */
+
 h2 {
     color: #000;
     margin: 30px 0 20px;
@@ -21,7 +21,7 @@ h3 {
     margin: 25px 0 15px;
 }
 
-/* 表单元素通用样式 */
+/* form */
 label {
     display: block;
     margin: 15px 0 5px;
@@ -47,7 +47,7 @@ select:focus {
     border-color: #000;
 }
 
-/* 按钮样式 */
+
 button {
     padding: 10px 20px;
     background-color: #000;
@@ -69,7 +69,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* 表格样式 */
+/* table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -114,7 +114,7 @@ tbody tr:hover {
     display: inline-block;
 }
 
-/* 下拉选择框组样式 */
+
 .select-group {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -122,7 +122,7 @@ tbody tr:hover {
     margin: 20px 0;
 }
 
-/* 响应式设计 */
+/* responsive */
 @media screen and (max-width: 768px) {
     .search-part {
         width: 95%;
@@ -148,7 +148,7 @@ tbody tr:hover {
     }
 }
 
-/* 添加项目的表格样式 */
+
 #addedItemsTableBody td {
     vertical-align: middle;
 }
@@ -160,13 +160,13 @@ tbody tr:hover {
     border-radius: 4px;
 }
 
-/* 操作按钮样式 */
+
 .action-button {
     padding: 6px 12px;
     font-size: 12px;
 }
 
-/* 搜索结果表格样式 */
+
 #foodItemsTableBody button {
     padding: 6px 12px;
     font-size: 12px;

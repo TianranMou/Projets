@@ -1,29 +1,29 @@
-/* 表格样式 */
+/* Table */
 table {
     width: 90%;
     max-width: 1200px;
     margin: 20px auto;
     border-collapse: collapse;
     background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增强阴影效果 */
-    border-radius: 8px; /* 添加圆角 */
-    overflow: hidden; /* 确保圆角效果可见 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+    overflow: hidden; 
 }
 
 caption {
-    font-size: 2.4em; /* 增大标题字体 */
+    font-size: 2.4em; 
     padding: 25px;
     font-weight: bold;
     color: #000;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 添加文字阴影 */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
 }
 
 th, td {
-    padding: 18px; /* 增加内边距 */
+    padding: 18px; 
     text-align: left;
     border-bottom: 1px solid #ddd;
     color: #000;
-    font-size: 1.4em; /* 增大字体 */
+    font-size: 1.4em; 
     line-height: 1.5;
 }
 
@@ -31,16 +31,16 @@ th {
     background-color: #000;
     color: white;
     font-weight: 600;
-    font-size: 1.5em; /* 表头字体更大 */
+    font-size: 1.5em;
 }
 
 tr:hover {
     background-color: #f8f8f8;
     transition: all 0.3s ease;
-    transform: scale(1.01); /* 悬停时轻微放大效果 */
+    transform: scale(1.01); 
 }
 
-/* 搜索区域样式 */
+
 .search-part {
     width: 90%;
     max-width: 1200px;
@@ -77,14 +77,14 @@ button:hover {
     background-color: #333;
 }
 
-/* 操作按钮行样式 */
+
 .action-row {
     background-color: #f9f9f9;
     text-align: center;
 }
 
 .action-row td {
-    text-align: center; /* 确保td也是居中的 */
+    text-align: center; 
 }
 
 .action-row button {
@@ -92,10 +92,10 @@ button:hover {
     padding: 10px 20px;
     background-color: #000;
     min-width: 120px;
-    display: inline-block; /* 确保按钮能够水平排列 */
+    display: inline-block; 
 }
 
-/* 编辑模式输入框样式 */
+
 input[type="text"],
 input[type="number"],
 input[type="date"] {
@@ -106,7 +106,7 @@ input[type="date"] {
     font-size: 1.1em;
 }
 
-/* 响应式设计 */
+
 @media screen and (max-width: 768px) {
     #searchField {
         width: 100%;

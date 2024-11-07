@@ -1,4 +1,4 @@
-/* 用户信息卡片容器 */
+/* Welcome Message */
 #welcomeMessage {
     max-width: 800px;
     margin: 40px auto;
@@ -14,7 +14,6 @@
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
 
-/* 欢迎标题 */
 #welcomeMessage h2 {
     text-align: center;
     font-size: 2.2em;
@@ -24,7 +23,7 @@
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
-/* 表格基本样式 */
+/* user info table */
 #usersTableBody {
     width: 100%;
     border-collapse: separate;
@@ -35,7 +34,7 @@
     background: white;
 }
 
-/* 数据行样式 */
+
 .data-row {
     transition: all 0.3s ease;
     background: white;
@@ -72,7 +71,7 @@
     color: #212529;
 }
 
-/* 操作行样式 */
+
 .action-row {
     background: linear-gradient(to right, #f8f9fa, #ffffff);
 }
@@ -82,7 +81,7 @@
     text-align: center;
 }
 
-/* 按钮样式 */
+
 .action-row button {
     padding: 10px 25px;
     margin: 0 8px;
@@ -103,7 +102,7 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* 编辑模式输入框样式 */
+
 #usersTableBody input,
 #usersTableBody select {
     width: 100%;
@@ -123,7 +122,7 @@
     box-shadow: 0 0 0 3px rgba(73, 80, 87, 0.1);
 }
 
-/* 退出按钮样式 */
+
 .submit-btn {
     display: block;
     width: 200px;
@@ -146,7 +145,7 @@
     background: linear-gradient(to right, #495057, #343a40);
 }
 
-/* 响应式设计 */
+/* responsive */
 @media screen and (max-width: 768px) {
     #welcomeMessage {
         margin: 20px;
@@ -164,7 +163,7 @@
     }
 }
 
-/* 动画效果 */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -180,7 +179,6 @@
     animation: fadeIn 0.5s ease-out;
 }
 
-/* 表格行交替颜色 */
 .data-row:nth-child(4n+1),
 .data-row:nth-child(4n+2) {
     background-color: #f8f9fa;
