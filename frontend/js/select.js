@@ -9,7 +9,7 @@ let pageSize = 10;
 
 // 
 function loadGroups() {
-    fetch('./backend/group.php')
+    fetch('../backend/group.php')
         .then(response => response.json())
         .then(data => {
             const foodGroupSelect = document.getElementById("foodGroup");
@@ -29,7 +29,7 @@ function loadSubGroup() {
     const groupId = document.getElementById("foodGroup").value;
     if (!groupId) return;
 
-    fetch(`./backend/group.php?groupId=${groupId}`)
+    fetch(`../backend/group.php?groupId=${groupId}`)
         .then(response => response.json())
         .then(data => {
             const foodSubGroupSelect = document.getElementById("foodSubGroup");
@@ -49,7 +49,7 @@ function loadSubSubGroup() {
     const subGroupId = document.getElementById("foodSubGroup").value;
     if (!subGroupId) return;
 
-    fetch(`./backend/group.php?subGroupId=${subGroupId}`)
+    fetch(`../backend/group.php?subGroupId=${subGroupId}`)
         .then(response => response.json())
         .then(data => {
             const foodSubSubGroupSelect = document.getElementById("foodSubSubGroup");
@@ -69,7 +69,7 @@ function loadFoodItems() {
     const subSubGroupId = document.getElementById("foodSubSubGroup").value;
     if (!subSubGroupId) return;
 
-    fetch(`./backend/group.php?subSubGroupId=${subSubGroupId}`)
+    fetch(`../backend/group.php?subSubGroupId=${subSubGroupId}`)
     .then(response => response.json())
     .then(data => {
         foodItems = data;
@@ -186,7 +186,7 @@ function searchFood() {
         return;
     }
 
-    fetch(`./backend/group.php?search=${encodeURIComponent(foodName)}`)
+    fetch(`../backend/group.php?search=${encodeURIComponent(foodName)}`)
         .then(response => response.json())
         .then(data => {
             foodItems = data;
@@ -215,7 +215,7 @@ function submitSelectedItems() {
         }))
     };
 
-    fetch('./backend/meal.php', {
+    fetch('../backend/meal.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

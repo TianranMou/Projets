@@ -1,6 +1,6 @@
 
 (function() {
-    fetch('backend/check_login_status.php')
+    fetch('../backend/check_login_status.php')
         .then(response => response.json())
         .then(data => {
             if (!data.loggedIn) {

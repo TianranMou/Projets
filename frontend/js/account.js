@@ -14,7 +14,7 @@ const sportLevelMapping = {
 };
 
 function get_userinfo(){
-    fetch('./backend/statis.php?action=userinfo')
+    fetch('../backend/statis.php?action=userinfo')
     .then(response => response.json())
     .then(data => {
 
@@ -225,7 +225,7 @@ function saveField(index, event) {
         updatedValue = document.getElementById(`edit-dob-${index}`).value;
     }
 
-    fetch('./backend/statis.php', {
+    fetch('../backend/statis.php', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -255,7 +255,7 @@ function saveField(index, event) {
 
             valueCell.textContent = updatedValue;
         };
-
+        get_userinfo(); 
         const actionCell = document.querySelector(`#action-row-${index} td`);
         actionCell.innerHTML = `<button onclick="edituser(${index}, event)">Modifier</button>`;
     });

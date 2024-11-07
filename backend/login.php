@@ -18,16 +18,16 @@ try {
         
         error_log('Login successful - User ID: ' . $_SESSION['user_id'] . ', Name: ' . $_SESSION['user_name']);
         
-        header('Location: ../account.html');
+        header('Location: ../frontend/account.html');
         exit();
     } else {
-        header('Location: ../account.html?error=invalid');
+        header('Location: ../frontend/account.html?error=invalid');
         exit();
     }
 
 } catch(PDOException $e) {
     error_log('Login error: ' . $e->getMessage());
-    header('Location: ../account.html?error=system');
+    header('Location: ../frontend/account.html?error=system');
     exit();
 }
 ?>
