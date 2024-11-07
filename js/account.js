@@ -49,7 +49,17 @@ function get_userinfo(){
                 if (key === "SPORT_VALUE") {
                     value = sportLevelMapping[value] || value;
                 }
-        
+
+                if (key === "ID_USER") {
+                    value = user[key];
+                    let newRow = `<tr class="data-row">
+                        <td>${displayName}</td>
+                        <td>${value}</td>
+                    </tr>`;
+                    tableBody.insertAdjacentHTML('beforeend', newRow);
+                    return; 
+                }
+                
                 let newRow = `<tr class="data-row" onclick="toggleActionRow(${index})">
                     <td>${displayName}</td>
                     <td>${value}</td>
