@@ -31,11 +31,11 @@ function get_userinfo(){
         NAME : "Nom",
         DATE_OF_BIRTH :"Date de naissance",
         PWD:"PWD",
-        EMAIL:"Email",
-        Height:"Hauteur(cm)"
+        email:"Email",
+        height:"Hauteur(cm)"
     };
 
-    const displayOrder= ["SURNAME","NAME","ID_USER","ID_SEXE","DATE_OF_BIRTH","EMAIL","SPORT_VALUE","Height"]
+    const displayOrder= ["SURNAME","NAME","ID_USER","ID_SEXE","DATE_OF_BIRTH","email","SPORT_VALUE","height"]
 
         data.forEach((user) => {
             displayOrder.forEach((key,index) => {
