@@ -1,0 +1,1926 @@
+{
+	"info": {
+		"_postman_id": "7e35842a-0407-455a-8580-9f5b7d80adb2",
+		"name": "REST API basics: CRUD, test & variable",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38644877"
+	},
+	"item": [
+		{
+			"name": "get userinfo&nutrition data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/projet/Projets/backend/statis.php?action=user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projet",
+						"Projets",
+						"backend",
+						"statis.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "user"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": [
+				{
+					"name": "get userinfo&nutrition data",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php?action=user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:10:34 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3482"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user_data\": [\n        {\n            \"DATE_OF_BIRTH\": \"2024-11-01\",\n            \"SPORT_VALUE\": \"0\",\n            \"HEIGHT\": \"170\"\n        }\n    ],\n    \"nutrition_data\": [\n        {\n            \"DICTIONARYNUTRITION\": \"Energie (kJ/100 g)\",\n            \"average_daily_intake\": \"33.720000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Energie (kcal/100 g)\",\n            \"average_daily_intake\": \"8.200000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Eau (g/100 g)\",\n            \"average_daily_intake\": \"2.812000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Protéines (g/100 g)\",\n            \"average_daily_intake\": \"0.062400000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Glucides (g/100 g)\",\n            \"average_daily_intake\": \"0.033200000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Lipides (g/100 g)\",\n            \"average_daily_intake\": \"0.824000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Sucres (g/100 g)\",\n            \"average_daily_intake\": \"0.016000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Fructose (g/100 g)\",\n            \"average_daily_intake\": \"0.006400000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Galactose (g/100 g)\",\n            \"average_daily_intake\": \"0.002920000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Glucose (g/100 g)\",\n            \"average_daily_intake\": \"0.006400000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Lactose (g/100 g)\",\n            \"average_daily_intake\": \"0.008000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Maltose (g/100 g)\",\n            \"average_daily_intake\": \"0.008000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Saccharose (g/100 g)\",\n            \"average_daily_intake\": \"0.008000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Amidon (g/100 g)\",\n            \"average_daily_intake\": \"0.014000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Fibres (g/100 g)\",\n            \"average_daily_intake\": \"0.144000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Alcool (g/100 g)\",\n            \"average_daily_intake\": \"0.000000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"AG saturés (g/100 g)\",\n            \"average_daily_intake\": \"0.180400000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"AG monoinsaturés (g/100 g)\",\n            \"average_daily_intake\": \"0.492000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"AG polyinsaturés (g/100 g)\",\n            \"average_daily_intake\": \"0.113200000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Cholestérol (mg/100 g)\",\n            \"average_daily_intake\": \"0.020000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Sel chlorure (g/100 g)\",\n            \"average_daily_intake\": \"0.000600000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Calcium (mg/100 g)\",\n            \"average_daily_intake\": \"0.376000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Cuivre (mg/100 g)\",\n            \"average_daily_intake\": \"0.007200000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Fer (mg/100 g)\",\n            \"average_daily_intake\": \"0.013600000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Iode (µg/100 g)\",\n            \"average_daily_intake\": \"0.800000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Magnésium (mg/100 g)\",\n            \"average_daily_intake\": \"0.840000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Manganèse (mg/100 g)\",\n            \"average_daily_intake\": \"0.008000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Phosphore (mg/100 g)\",\n            \"average_daily_intake\": \"1.520000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Potassium (mg/100 g)\",\n            \"average_daily_intake\": \"17.200000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Sélénium (µg/100 g)\",\n            \"average_daily_intake\": \"0.800000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Sodium (mg/100 g)\",\n            \"average_daily_intake\": \"0.240000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Zinc (mg/100 g)\",\n            \"average_daily_intake\": \"0.017200000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"BetaCarotène (µg/100 g)\",\n            \"average_daily_intake\": \"0.200000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Vitamine D (µg/100 g)\",\n            \"average_daily_intake\": \"0.000000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Vitamine E (mg/100 g)\",\n            \"average_daily_intake\": \"0.089200000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Vitamine K1 (µg/100 g)\",\n            \"average_daily_intake\": \"0.580000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Vitamine K2 (µg/100 g)\",\n            \"average_daily_intake\": \"0.000000000000\"\n        },\n        {\n            \"DICTIONARYNUTRITION\": \"Vitamine C (mg/100 g)\",\n            \"average_daily_intake\": \"0.020000000000\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Post data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": [
+				{
+					"name": "Update name",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"SURNAME\",\"updated_value\":\"DOGDOG\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:12:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				},
+				{
+					"name": "Update surname",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"NAME\",\"updated_value\":\"DOGDOGDOGDOG\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:13:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				},
+				{
+					"name": "Update sport",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"SPORT_VALUE\",\"updated_value\":\"2\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:13:48 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete meal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": [
+				{
+					"name": "Delete meal",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/meal.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"meal.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:21:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"success\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get userinfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/projet/Projets/backend/statis.php?action=userinfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projet",
+						"Projets",
+						"backend",
+						"statis.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "userinfo"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get userinfo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php?action=userinfo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "userinfo"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:09:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "197"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"ID_USER\": \"11\",\n        \"ID_SEXE\": \"0\",\n        \"SPORT_VALUE\": \"0\",\n        \"SURNAME\": \"catcat\",\n        \"NAME\": \"new3\",\n        \"DATE_OF_BIRTH\": \"2024-11-01\",\n        \"PWD\": \"81dc9bdb52d04dc20036dbd8313ed055\",\n        \"EMAIL\": \"88888cat@gmail.com\",\n        \"Height\": \"170\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Update meal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"meal_id\":\"14\",\"meal_time\":\"2024-11-07 23:26:00\",\"food_id\":\"13004\",\"quantity_eat\":\"50000\",\"food_id_old\":\"13004\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/projet/Projets/backend/meal.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projet",
+						"Projets",
+						"backend",
+						"meal.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update name",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"SURNAME\",\"updated_value\":\"DOGDOG\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:12:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				},
+				{
+					"name": "Update surname",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"NAME\",\"updated_value\":\"DOGDOGDOGDOG\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:13:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				},
+				{
+					"name": "Update sport",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"SPORT_VALUE\",\"updated_value\":\"2\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:13:48 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				},
+				{
+					"name": "Update meal",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"meal_id\":\"14\",\"meal_time\":\"2024-11-07 23:26:00\",\"food_id\":\"13004\",\"quantity_eat\":\"50000\",\"food_id_old\":\"13004\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/meal.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"meal.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:21:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"success\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create meal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user_id\":2,\"meal_time\":\"2024-11-08 09:17:00\",\"items\":[{\"food_id\":11187,\"quantity_eat\":1}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/projet/Projets/backend/meal.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projet",
+						"Projets",
+						"backend",
+						"meal.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update name",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"SURNAME\",\"updated_value\":\"DOGDOG\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:12:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				},
+				{
+					"name": "Update surname",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"NAME\",\"updated_value\":\"DOGDOGDOGDOG\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:13:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				},
+				{
+					"name": "Update sport",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"field_name\":\"SPORT_VALUE\",\"updated_value\":\"2\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/statis.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"statis.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:13:48 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Update successful\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get group",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/projet/Projets/backend/group.php?groupId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projet",
+						"Projets",
+						"backend",
+						"group.php"
+					],
+					"query": [
+						{
+							"key": "groupId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get group",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/group.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"group.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:26:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "752"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"ID_GROUP\": \"0\",\n        \"NAME_GROUP\": \"dessert\"\n    },\n    {\n        \"ID_GROUP\": \"1\",\n        \"NAME_GROUP\": \"entrées et plats composés\"\n    },\n    {\n        \"ID_GROUP\": \"2\",\n        \"NAME_GROUP\": \"fruits, légumes, légumineuses et oléagineux\"\n    },\n    {\n        \"ID_GROUP\": \"3\",\n        \"NAME_GROUP\": \"produits céréaliers\"\n    },\n    {\n        \"ID_GROUP\": \"4\",\n        \"NAME_GROUP\": \"viandes, œufs, poissons et assimilés\"\n    },\n    {\n        \"ID_GROUP\": \"5\",\n        \"NAME_GROUP\": \"produits laitiers et assimilés\"\n    },\n    {\n        \"ID_GROUP\": \"6\",\n        \"NAME_GROUP\": \"eaux et autres boissons\"\n    },\n    {\n        \"ID_GROUP\": \"7\",\n        \"NAME_GROUP\": \"produits sucrés\"\n    },\n    {\n        \"ID_GROUP\": \"8\",\n        \"NAME_GROUP\": \"glaces et sorbets\"\n    },\n    {\n        \"ID_GROUP\": \"9\",\n        \"NAME_GROUP\": \"matières grasses\"\n    },\n    {\n        \"ID_GROUP\": \"10\",\n        \"NAME_GROUP\": \"aides culinaires et ingrédients divers\"\n    },\n    {\n        \"ID_GROUP\": \"11\",\n        \"NAME_GROUP\": \"aliments infantiles\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "get subgroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/projet/Projets/backend/group.php?subGroupId=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projet",
+						"Projets",
+						"backend",
+						"group.php"
+					],
+					"query": [
+						{
+							"key": "subGroupId",
+							"value": "101"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get subgroup",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/group.php?groupId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"group.php"
+							],
+							"query": [
+								{
+									"key": "groupId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:26:51 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "400"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"ID_SUBGROUP\": \"101\",\n        \"Name_Subgroup\": \"salades composées et crudités\"\n    },\n    {\n        \"ID_SUBGROUP\": \"102\",\n        \"Name_Subgroup\": \"soupes\"\n    },\n    {\n        \"ID_SUBGROUP\": \"103\",\n        \"Name_Subgroup\": \"plats composés\"\n    },\n    {\n        \"ID_SUBGROUP\": \"104\",\n        \"Name_Subgroup\": \"pizzas, tartes et crêpes salées\"\n    },\n    {\n        \"ID_SUBGROUP\": \"105\",\n        \"Name_Subgroup\": \"sandwichs\"\n    },\n    {\n        \"ID_SUBGROUP\": \"106\",\n        \"Name_Subgroup\": \"feuilletées et autres entrées\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "get food",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/projet/Projets/backend/group.php?subSubGroupId=10101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projet",
+						"Projets",
+						"backend",
+						"group.php"
+					],
+					"query": [
+						{
+							"key": "subSubGroupId",
+							"value": "10101"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get food",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/group.php?subSubGroupId=10101",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"group.php"
+							],
+							"query": [
+								{
+									"key": "subSubGroupId",
+									"value": "10101"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:25:27 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1722"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"ID_FOOD\": \"25601\",\n        \"FOOD_NAME\": \"Salade de thon et légumes, appertisée\"\n    },\n    {\n        \"ID_FOOD\": \"25602\",\n        \"FOOD_NAME\": \"Salade composée avec viande ou poisson, appertisée\"\n    },\n    {\n        \"ID_FOOD\": \"25605\",\n        \"FOOD_NAME\": \"Champignons à la grecque, appertisés\"\n    },\n    {\n        \"ID_FOOD\": \"25606\",\n        \"FOOD_NAME\": \"Salade de pommes de terre, fait maison\"\n    },\n    {\n        \"ID_FOOD\": \"25608\",\n        \"FOOD_NAME\": \"Taboulé ou Salade de couscous\"\n    },\n    {\n        \"ID_FOOD\": \"25609\",\n        \"FOOD_NAME\": \"Salade de pomme de terre à la piémontaise\"\n    },\n    {\n        \"ID_FOOD\": \"25614\",\n        \"FOOD_NAME\": \"Salade de riz, appertisée\"\n    },\n    {\n        \"ID_FOOD\": \"25615\",\n        \"FOOD_NAME\": \"Salade de pâtes, végétarienne\"\n    },\n    {\n        \"ID_FOOD\": \"25616\",\n        \"FOOD_NAME\": \"Crudité, sans assaisonnement (aliment moyen)\"\n    },\n    {\n        \"ID_FOOD\": \"25619\",\n        \"FOOD_NAME\": \"Salade de pâtes aux légumes, avec poisson ou viande\"\n    },\n    {\n        \"ID_FOOD\": \"25626\",\n        \"FOOD_NAME\": \"Macédoine de légumes en salade, avec sauce\"\n    },\n    {\n        \"ID_FOOD\": \"25628\",\n        \"FOOD_NAME\": \"Salade César au poulet (salade verte, fromage, croûtons, sauce)\"\n    },\n    {\n        \"ID_FOOD\": \"25629\",\n        \"FOOD_NAME\": \"Salade végétale à base de boulgour et/ou quinoa et légumes\"\n    },\n    {\n        \"ID_FOOD\": \"26257\",\n        \"FOOD_NAME\": \"Carottes râpées, avec sauces\"\n    },\n    {\n        \"ID_FOOD\": \"26258\",\n        \"FOOD_NAME\": \"Salade de betterave, avec sauce\"\n    },\n    {\n        \"ID_FOOD\": \"26259\",\n        \"FOOD_NAME\": \"Salade de chou ou Coleslaw, avec sauce\"\n    },\n    {\n        \"ID_FOOD\": \"26260\",\n        \"FOOD_NAME\": \"Salade de concombre à la crème/fromage blanc\"\n    },\n    {\n        \"ID_FOOD\": \"26261\",\n        \"FOOD_NAME\": \"Salade de lentilles et saucisse fumée\"\n    },\n    {\n        \"ID_FOOD\": \"26262\",\n        \"FOOD_NAME\": \"Salade grecque, avec sauce\"\n    },\n    {\n        \"ID_FOOD\": \"26263\",\n        \"FOOD_NAME\": \"Salade de riz à la niçoise, avec sauce\"\n    },\n    {\n        \"ID_FOOD\": \"26269\",\n        \"FOOD_NAME\": \"Taboulé ou Salade de couscous au poulet\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "get subsubgroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/projet/Projets/backend/group.php?subGroupId=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projet",
+						"Projets",
+						"backend",
+						"group.php"
+					],
+					"query": [
+						{
+							"key": "subGroupId",
+							"value": "101"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get subsubgroup",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"meal_id\":\"16\",\"food_id\":\"11187\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projet/Projets/backend/group.php?subGroupId=101",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projet",
+								"Projets",
+								"backend",
+								"group.php"
+							],
+							"query": [
+								{
+									"key": "subGroupId",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 08 Nov 2024 08:27:19 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Win32) OpenSSL/1.0.2f PHP/7.0.3"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.0.3"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"ID_SUBSUBGROUP\": \"10101\",\n        \"Name_Subsubgroup\": \"salades composées et crudités\"\n    }\n]"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}

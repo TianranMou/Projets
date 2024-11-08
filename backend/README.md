@@ -1,6 +1,9 @@
 # User Control API Doucment
 
 
+## devEnv,php is for employ developpment environment, add it in the front of the php.file so that u can skip the login mudule.
+
+
 
 ## 1. get user's info
 

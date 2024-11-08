@@ -1,4 +1,5 @@
 <?php
+// include 'devEnv.php';
 session_start();
 require_once("pdo.php");
 
@@ -122,7 +123,7 @@ function updateUserField($pdo,$user_id, $field_name, $updated_value) {
 }
 
 
-if (!isset($_SESSION['user_id'])) {
+if (ENV !== 'development' && !isset($_SESSION['user_id'])) {
     http_response_code(401);
     echo json_encode(['error' => 'login first']);
     exit();
